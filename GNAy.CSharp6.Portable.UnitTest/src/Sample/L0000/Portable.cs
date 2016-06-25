@@ -83,6 +83,24 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         /// 
         /// </summary>
         [TestMethod]
+        public void ObjectEqualsNullException()
+        {
+            _unitTest.ObjectEqualsNullException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
+        public void ObjectEqualsNullPerformance()
+        {
+            _unitTest.ObjectEqualsNullPerformance();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
         public void ObjectToString()
         {
             _unitTest.ObjectToString();

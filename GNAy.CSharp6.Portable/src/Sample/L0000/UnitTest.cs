@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 #endregion
@@ -21,7 +22,7 @@ namespace GNAy.CSharp6.Portable.Sample
 {
     /// <summary>
     /// <para>All the test methods in this class must be stand along.</para>
-    /// <para>Don't write "using CSharp6.Portable.Sample;".</para>
+    /// <para>Don't use CSharp6.Portable.Sample.</para>
     /// </summary>
     public class UnitTest
     {
@@ -41,6 +42,15 @@ namespace GNAy.CSharp6.Portable.Sample
         public UnitTest()
         { }
 
+        //public void TestMethodSample()
+        //{
+        //    //arrange
+
+        //    //act
+
+        //    //assert
+        //}
+
 
         /// <summary>
         /// 
@@ -57,11 +67,6 @@ namespace GNAy.CSharp6.Portable.Sample
             mActual1 = mArgument1--;
             mActual2 = mArgument2++;
 
-            Debug.WriteLine(mArgument1);
-            Debug.WriteLine(mArgument2);
-            Debug.WriteLine(mActual1);
-            Debug.WriteLine(mActual2);
-
             //assert
             Contract.Assert(mArgument1 == int.MaxValue);
             Contract.Assert(mArgument2 == int.MinValue);
@@ -69,10 +74,11 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(mActual2 == int.MaxValue);
         }
 
+
         /// <summary>
         /// 
         /// </summary>
-        internal partial class TestCalss1
+        internal partial class NumberCalculatingTest1
         {
             /// <summary>
             /// 
@@ -85,7 +91,7 @@ namespace GNAy.CSharp6.Portable.Sample
             protected static int Value2 = int.MaxValue;
         }
 
-        internal partial class TestCalss1
+        internal partial class NumberCalculatingTest1
         {
             public static int GetValue1()
             {
@@ -98,7 +104,7 @@ namespace GNAy.CSharp6.Portable.Sample
             }
         }
 
-        private sealed class _testCalss2 : TestCalss1
+        private sealed class _numberCalculatingTest2 : NumberCalculatingTest1
         {
             public static new int GetValue1()
             {
@@ -117,23 +123,28 @@ namespace GNAy.CSharp6.Portable.Sample
         public void NumberCalculating2()
         {
             //arrange
-            int mArgument1 = TestCalss1.GetValue1();
-            int mArgument2 = TestCalss1.GetValue2();
-            int mArgument3 = _testCalss2.GetValue1();
-            int mArgument4 = _testCalss2.GetValue2();
+            int mArgument1 = NumberCalculatingTest1.GetValue1();
+            int mArgument2 = NumberCalculatingTest1.GetValue2();
+            int mArgument3 = _numberCalculatingTest2.GetValue1();
+            int mArgument4 = _numberCalculatingTest2.GetValue2();
+            bool mActual1 = false;
+            bool mActual2 = false;
+            bool mActual3 = false;
+            bool mActual4 = false;
 
             //act
-            Debug.WriteLine(mArgument1);
-            Debug.WriteLine(mArgument2);
-            Debug.WriteLine(mArgument3);
-            Debug.WriteLine(mArgument4);
+            mActual1 = (mArgument1 == int.MinValue);
+            mActual2 = (mArgument2 == int.MaxValue);
+            mActual3 = (mArgument3 == int.MaxValue);
+            mActual4 = (mArgument4 == int.MinValue);
 
             //assert
-            Contract.Assert(mArgument1 == int.MinValue);
-            Contract.Assert(mArgument2 == int.MaxValue);
-            Contract.Assert(mArgument3 == int.MaxValue);
-            Contract.Assert(mArgument4 == int.MinValue);
+            Contract.Assert(mActual1);
+            Contract.Assert(mActual2);
+            Contract.Assert(mActual3);
+            Contract.Assert(mActual4);
         }
+
 
         /// <summary>
         /// 
@@ -176,6 +187,7 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(!mActual3);
             Contract.Assert(!mActual4);
         }
+
 
         /// <summary>
         /// 
@@ -220,10 +232,11 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(mActual4);
         }
 
+
         /// <summary>
         /// 
         /// </summary>
-        public class TestCalss3
+        public class ConstructorOrderTest1
         {
             /// <summary>
             /// 
@@ -245,7 +258,7 @@ namespace GNAy.CSharp6.Portable.Sample
             /// </summary>
             public readonly string Value2 = (Value1 + Two); //132
 
-            static TestCalss3()
+            static ConstructorOrderTest1()
             {
                 Value1 = (Value1 + "3"); //13
             }
@@ -253,7 +266,7 @@ namespace GNAy.CSharp6.Portable.Sample
             /// <summary>
             /// 
             /// </summary>
-            public TestCalss3()
+            public ConstructorOrderTest1()
             {
                 Value2 = (Value1 + "4"); //134
             }
@@ -262,7 +275,7 @@ namespace GNAy.CSharp6.Portable.Sample
         /// <summary>
         /// 
         /// </summary>
-        public class TestCalss4 : TestCalss3
+        public class ConstructorOrderTest2 : ConstructorOrderTest1
         {
             /// <summary>
             /// 
@@ -274,7 +287,7 @@ namespace GNAy.CSharp6.Portable.Sample
             /// </summary>
             public string Value4 = $"{Value3}6"; //1313576
 
-            static TestCalss4()
+            static ConstructorOrderTest2()
             {
                 Value3 = $"{Value1}{Value3}7"; //131357
             }
@@ -282,7 +295,7 @@ namespace GNAy.CSharp6.Portable.Sample
             /// <summary>
             /// 
             /// </summary>
-            public TestCalss4()
+            public ConstructorOrderTest2()
             {
                 Value4 = $"{Value2}{Value3}8"; //1341313578
             }
@@ -294,14 +307,252 @@ namespace GNAy.CSharp6.Portable.Sample
         public void ConstructorOrder()
         {
             //arrange
-            TestCalss4 mArgument1 = new TestCalss4();
+            ConstructorOrderTest2 mArgument1 = new ConstructorOrderTest2();
+            bool mActual1 = false;
 
             //act
-            Debug.WriteLine(mArgument1.Value4);
+            mActual1 = (mArgument1.Value4 == "1341313578");
 
             //assert
-            Contract.Assert(mArgument1.Value4 == "1341313578");
+            Contract.Assert(mActual1);
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private class _objectEqualsNullExceptionTest
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="ioLeft"></param>
+            /// <param name="ioRight"></param>
+            /// <returns></returns>
+            public static bool operator ==(_objectEqualsNullExceptionTest ioLeft, _objectEqualsNullExceptionTest ioRight)
+            {
+                if (object.ReferenceEquals(ioRight, null))
+                {
+                    throw new NotSupportedException("Object equals null exception test.");
+                }
+
+                return object.ReferenceEquals(ioLeft, ioRight);
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="ioLeft"></param>
+            /// <param name="ioRight"></param>
+            /// <returns></returns>
+            public static bool operator !=(_objectEqualsNullExceptionTest ioLeft, _objectEqualsNullExceptionTest ioRight)
+            {
+                return !(ioLeft == ioRight);
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="ioTarget"></param>
+            /// <returns></returns>
+            public override bool Equals(object ioTarget)
+            {
+                return (this == (ioTarget as _objectEqualsNullExceptionTest));
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+        }
+
+        private bool isNull<T>(T ioTarget)
+        {
+            return !(ioTarget is T);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ObjectEqualsNullException()
+        {
+            //arrange
+            _objectEqualsNullExceptionTest mArgument1 = null;
+            StringBuilder mArgument2 = new StringBuilder();
+            bool mActual1 = false;
+            bool mActual2 = false;
+            bool mActual3 = true;
+            bool mActual4 = true;
+            bool mActual5 = true;
+            bool mActual6 = false;
+
+            //act
+            try
+            {
+                mArgument2.Append("A1");
+                mActual1 = (mArgument1 == null);
+                mArgument2.Append("A2");
+            }
+            catch (Exception mException)
+            {
+                mArgument2.Append("A3");
+                mArgument2.Append(mException.Message);
+            }
+            finally
+            {
+                mArgument2.Append("A4");
+            }
+            mArgument2.Append(Environment.NewLine);
+
+            try
+            {
+                mArgument2.Append("B1");
+                mActual2 = mArgument1.Equals(null);
+                mArgument2.Append("B2");
+            }
+            catch (Exception mException)
+            {
+                mArgument2.Append("B3");
+                mArgument2.Append(mException.Message);
+            }
+            finally
+            {
+                mArgument2.Append("B4");
+            }
+            mArgument2.Append(Environment.NewLine);
+
+            mArgument1 = new _objectEqualsNullExceptionTest();
+
+            try
+            {
+                mArgument2.Append("C1");
+                mActual3 = (mArgument1 == null);
+                mArgument2.Append("C2");
+            }
+            catch (Exception mException)
+            {
+                mArgument2.Append("C3");
+                mArgument2.Append(mException.Message);
+            }
+            finally
+            {
+                mArgument2.Append("C4");
+            }
+            mArgument2.Append(Environment.NewLine);
+
+            try
+            {
+                mArgument2.Append("D1");
+                mActual4 = mArgument1.Equals(null);
+                mArgument2.Append("D2");
+            }
+            catch (Exception mException)
+            {
+                mArgument2.Append("D3");
+                mArgument2.Append(mException.Message);
+            }
+            finally
+            {
+                mArgument2.Append("D4");
+            }
+            mArgument2.Append(Environment.NewLine);
+
+            try
+            {
+                mArgument2.Append("E1");
+                mActual5 = isNull(mArgument1);
+                mArgument2.Append("E2");
+            }
+            catch (Exception mException)
+            {
+                mArgument2.Append("E3");
+                mArgument2.Append(mException.Message);
+            }
+            finally
+            {
+                mArgument2.Append("E4");
+            }
+
+            mActual6 = (mArgument2.ToString() ==
+@"A1A3Object equals null exception test.A4
+B1B3並未將物件參考設定為物件的執行個體。B4
+C1C3Object equals null exception test.C4
+D1D3Object equals null exception test.D4
+E1E2E4");
+
+            //assert
+            Contract.Assert(!mActual1);
+            Contract.Assert(!mActual2);
+            Contract.Assert(mActual3);
+            Contract.Assert(mActual4);
+            Contract.Assert(!mActual5);
+            Contract.Assert(mActual6);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ObjectEqualsNullPerformance()
+        {
+            //arrange
+            const int mArgument1 = (1000 * 10000);
+            Stopwatch mArgument2 = new Stopwatch();
+            object mArgument3 = null;
+            bool mActual1 = false;
+            bool mActual2 = false;
+            bool mActual3 = false;
+            long mActual4 = 0;
+            long mActual5 = 0;
+            long mActual6 = 0;
+
+            //act
+            //operator ==
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mActual1 = (mArgument3 == null);
+            }
+            mArgument2.Stop();
+            mActual4 = mArgument2.ElapsedTicks;
+            Debug.WriteLine($"[operator ==][{mActual1}][{mActual4}][{mArgument1 / mActual4}]");
+
+            //object.ReferenceEquals
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mActual2 = object.ReferenceEquals(mArgument3, null);
+            }
+            mArgument2.Stop();
+            mActual5 = mArgument2.ElapsedTicks;
+            Debug.WriteLine($"[object.ReferenceEquals][{mActual2}][{mActual5}][{mArgument1 / mActual5}]");
+
+            //isNull
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mActual3 = isNull(mArgument3);
+            }
+            mArgument2.Stop();
+            mActual6 = mArgument2.ElapsedTicks;
+            Debug.WriteLine($"[isNull][{mActual3}][{mActual6}][{mArgument1 / mActual6}]");
+
+            //assert
+            Contract.Assert(mActual1);
+            Contract.Assert(mActual2);
+            Contract.Assert(mActual3);
+        }
+
 
         /// <summary>
         /// 
@@ -337,7 +588,8 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(!mActual6);
         }
 
-        private struct _testStructure1
+
+        private struct _classAndStructureTest
         {
             public char Value1;
             public char[] Value2;
@@ -354,20 +606,18 @@ namespace GNAy.CSharp6.Portable.Sample
         public void ClassAndStructure()
         {
             //arrange
-            _testStructure1 mArgument1 = new _testStructure1() { Value1 = 'a', Value2 = new char[1] { 'a' } };
-            _testStructure1 mArgument2 = mArgument1;
+            _classAndStructureTest mArgument1 = new _classAndStructureTest() { Value1 = 'a', Value2 = new char[1] { 'a' } };
+            _classAndStructureTest mArgument2 = mArgument1;
 
             //act
             mArgument2.Value1 = 'b';
             mArgument2.Value2[0] = 'b';
 
-            Debug.WriteLine(mArgument1.ToString());
-            Debug.WriteLine(mArgument2.ToString());
-
             //assert
             Contract.Assert(mArgument1.ToString() == "ab");
             Contract.Assert(mArgument2.ToString() == "bb");
         }
+
 
         /// <summary>
         /// 
@@ -381,13 +631,11 @@ namespace GNAy.CSharp6.Portable.Sample
             mArgument1["a"] = byte.MinValue;
             mArgument1["A"] = (byte)(mArgument1["a"] - 1);
 
-            Debug.WriteLine(mArgument1["a"]);
-            Debug.WriteLine(mArgument1["A"]);
-
             //assert
             Contract.Assert(mArgument1["a"] == byte.MaxValue);
             Contract.Assert(mArgument1["A"] == byte.MaxValue);
         }
+
 
         /// <summary>
         /// 
@@ -407,6 +655,7 @@ namespace GNAy.CSharp6.Portable.Sample
             //assert
             Contract.Assert(mActual1);
         }
+
 
         /// <summary>
         /// 
@@ -443,6 +692,7 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(!mActual3);
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -473,6 +723,7 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(mActual1);
             Contract.Assert(mActual2);
         }
+
 
         /// <summary>
         /// 
@@ -528,6 +779,7 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.Assert(mActual3);
             Contract.Assert(mActual4);
         }
+
 
         /// <summary>
         /// 

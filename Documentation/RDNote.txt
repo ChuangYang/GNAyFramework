@@ -1,0 +1,91 @@
+1. Programmer's Job Every Day
+
+1.1 After Working
+
+Rebuild projects.
+Projects backup locally and remotely.
+Run test.
+
+
+1.2 Before Working
+
+Check the backups.
+Check the test.
+Rebuild projects.
+Put bugs in schedule and set them to important level.
+
+
+----------------------------------------------------------------------------------------------------
+1. Coding Style
+
+1.1 Coding Principle
+
+As far as possible without abbreviation (unless it is a popular practice).
+Coding style should be separated from the programing language and compiler. Regardless of any language and compiler, the style must make the code be readable and maintainable easily.
+Coding style should be separated from the programmer. The code should be easier to handover and maintain.
+The code and compiler should be separated. The same function can be used by the different compilers to compile successfully. The strong dependency components should be packed by using ¡§define¡¨.
+Don¡¦t trust compiler, because compiler must have bugs.
+Coding principle should be followed the principles of Finite-State Machine and Defensive Programming.
+The algorithm and programing language must be separated. The same algorithm can be written by the different languages.
+Even some programming languages are not case-sensitive, but the coding style should be case-sensitive.
+
+
+1.2 Naming Rule
+
+I:   Interface
+E:   Enumeration
+
+T:   Type or Generic
+
+Z:   Extension Method
+
+m:   The parameter created in the method (exception: i, j, k¡K).
+i:   The input parameter of the method.
+o:   The output parameter of the method.
+io:  The parameter that has the input and output abilities, so the name of reference type should be started with "io".
+
+The names of the parameters in the predicate of for-loop should be i, j, k¡K.
+The parameters named i, j, k¡K should only be used in the predicate of for-loop.
+
+
+1.3 Design Principle
+
+The different versions should be packed and managed in the same project by using ¡§define¡¨.
+Because warning means the potential bug, we should do as far as possible to reduce the warnings.
+There is no magic number or magic string.
+
+Class should have the methods of constructor, destructor, and reset. Class and parameter should be given the default values when created.
+Because boxing and unboxing have the high cost, we should do as far as possible to reduce boxing and unboxing the classes.
+
+The fields of class should be private, so their names should be started with "f".
+The public members of class are the interface to contact with the other classes, so their names do not need to start with the special characteristic.
+Class design should be followed the higher cohesion and looser coupling principles.
+Class design should be followed Single Responsibility Principle.
+
+Structure should be as far as possible liked the simple data package (Model of MVC). Structure should be given the default value when created.
+When the data model is complex, the programmer should use class instead of structure.
+When the need to use structure, as far as possible, using the class to replace structure. Because the reference type is better performance and less memory usage then the value type.
+
+The common functions should be static.
+The reference data of the static function should be the input parameters.
+
+The names of the parameters in the predicate of for-loop should be i, j, k¡K.
+The parameters named i, j, k¡K should only be used in the predicate of for-loop.
+
+Coding principle should be followed the principles of Finite-State Machine and Defensive Programming.
+Don¡¦t forget the comment ¡§//TODO¡¨ when the time is not enough to design or write the good code.
+
+Implement the patterns of Guarded Suspension Pattern, Thread Pool, and Observer Pattern in the kernel of multi-thread programming first, than using these patterns to design and implement the business logic layer and application layer.
+
+
+1.4 Design Pattern
+
+Use Continuous Refactoring and modular programming. Do as far as possible to reduce coping and pasting.
+Use inheritance less and component more. Component programming is better and easier to implement modular programming.
+Use MVC (Model-View-Controller).
+The constructor of class or structure should be implemented with Factory Method Pattern.
+Use pool, container, or bucket to packet and manage the same kind of data.
+Use Observer Pattern to handle the same kind of events.
+Implement the patterns of Guarded Suspension Pattern, Thread Pool, and Observer Pattern in the kernel of multi-thread programming first, than using these patterns to design and implement the business logic layer and application layer.
+
+
