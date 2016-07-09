@@ -21,12 +21,18 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
     [TestClass]
     public class Portable
     {
-        private static CSharp6.Portable.Sample.UnitTest _unitTest;
+        private static CSharp6.Portable.Tests.Sample.UnitTest _unitTest;
 
         static Portable()
         {
-            _unitTest = new CSharp6.Portable.Sample.UnitTest();
+            _unitTest = new CSharp6.Portable.Tests.Sample.UnitTest();
         }
+
+        /// <summary>
+        /// Initialize the static instance.
+        /// </summary>
+        public static void Initialize()
+        { }
 
         /// <summary>
         /// 

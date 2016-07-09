@@ -33,6 +33,12 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         { }
 
         /// <summary>
+        /// Initialize the static instance.
+        /// </summary>
+        public static void Initialize()
+        { }
+
+        /// <summary>
         /// 
         /// </summary>
         public UnitTestSample()
@@ -824,11 +830,7 @@ E1E2E4");
 
             Console.WriteLine($"[{mArgument2}][{mArgument4}][{mArgument2 - mArgument4}][{mArgument2 / mArgument4}]");
             Console.WriteLine($"[{mArgument3}][{mArgument4}][{mArgument3 - mArgument4}][{mArgument3 / mArgument4}]");
-
-            if (mActual4)
-            {
-                Console.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4))");
-            }
+            Console.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4))");
 
             //assert
             Assert.IsTrue(mActual1);
@@ -1054,7 +1056,7 @@ E1E2E4");
             ParameterExpression mArgument5 = Expression.Parameter(mArgument4.GetParameters()[0].ParameterType, mArgument4.GetParameters()[0].Name);
             MethodCallExpression mArgument6 = Expression.Call(Expression.Constant(this), mArgument4, mArgument5);
 
-            ParameterExpression[] mArgument7 = new ParameterExpression[] { Expression.Parameter(typeof(int)), Expression.Parameter(typeof(int)) };
+            ParameterExpression[] mArgument7 = { Expression.Parameter(typeof(int)), Expression.Parameter(typeof(int)) };
             Func<int, int, int> mArgument8 = Expression.Lambda<Func<int, int, int>>(Expression.Add(mArgument7[0], mArgument7[1]), mArgument7).Compile();
 
             //act
@@ -1148,12 +1150,9 @@ E1E2E4");
             bool mActual7 = ((mArgument19 == mArgument10) && (mArgument10 == mArgument11) && (mArgument11 == mArgument12) && (mArgument12 == mArgument13) && (mArgument13 == mArgument16) && (mArgument16 == mArgument1));
             bool mActual8 = ((mActual3 < mActual2) && (mActual2 < mActual4) && (mActual5 < mActual4) && (mActual6 < mActual4) && (mActual1 < mActual4));
 
-            if (mActual8)
-            {
-                mArgument2.Reset();
-                Console.WriteLine(mArgument2.ElapsedTicks);
-                Console.WriteLine("((mActual3 < mActual2) && (mActual2 < mActual4) && (mActual5 < mActual4) && (mActual6 < mActual4) && (mActual1 < mActual4))");
-            }
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            Console.WriteLine("((mActual3 < mActual2) && (mActual2 < mActual4) && (mActual5 < mActual4) && (mActual6 < mActual4) && (mActual1 < mActual4))");
 
             //assert
             Assert.IsTrue(mActual7);
@@ -1309,12 +1308,9 @@ E1E2E4");
             bool mActual7 = ((mArgument7 == mArgument8) && (mArgument8 == mArgument9) && (mArgument9 == mArgument10) && (mArgument10 == mArgument11) && (mArgument11 == mArgument12) && (mArgument12 == mArgument1));
             bool mActual8 = ((mActual1 < mActual3) && (mActual3 < mActual2) && (mActual2 < mActual6) && (mActual1 < mActual5) && (mActual5 < mActual4) && (mActual4 < mActual6));
 
-            if (mActual8)
-            {
-                mArgument2.Reset();
-                Console.WriteLine(mArgument2.ElapsedTicks);
-                Console.WriteLine("((mActual1 < mActual3) && (mActual3 < mActual2) && (mActual2 < mActual6) && (mActual1 < mActual5) && (mActual5 < mActual4) && (mActual4 < mActual6))");
-            }
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            Console.WriteLine("((mActual1 < mActual3) && (mActual3 < mActual2) && (mActual2 < mActual6) && (mActual1 < mActual5) && (mActual5 < mActual4) && (mActual4 < mActual6))");
 
             //assert
             Assert.IsTrue(mActual7);

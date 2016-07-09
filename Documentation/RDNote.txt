@@ -37,7 +37,7 @@ E:   Enumeration
 
 T:   Type or Generic
 
-Z:   Extension Method
+z:   Extension Method
 
 m:   The parameter created in the method (exception: i, j, k¡K).
 i:   The input parameter of the method.

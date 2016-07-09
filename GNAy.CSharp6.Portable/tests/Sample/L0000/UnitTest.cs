@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 #region .NET Framework namespace.
-using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 #endregion
@@ -18,11 +20,11 @@ using System.Threading;
 #region Alias.
 #endregion
 
-namespace GNAy.CSharp6.Portable.Sample
+namespace GNAy.CSharp6.Portable.Tests.Sample
 {
     /// <summary>
     /// <para>All the test methods in this class must be stand along.</para>
-    /// <para>Don't use CSharp6.Portable.Sample.</para>
+    /// <para>Don't use CSharp6.Portable.Tests.Sample.</para>
     /// </summary>
     public class UnitTest
     {
@@ -31,11 +33,18 @@ namespace GNAy.CSharp6.Portable.Sample
             Contract.ContractFailed += contractFailedEvent;
         }
 
+        /// <summary>
+        /// Initialize the static instance.
+        /// </summary>
+        public static void Initialize()
+        { }
+
         private static void contractFailedEvent(object sender, ContractFailedEventArgs e)
         {
             e.SetUnwind();
             throw new Exception(e.Message);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -767,11 +776,7 @@ E1E2E4");
 
             Debug.WriteLine($"[{mArgument2}][{mArgument4}][{mArgument2 - mArgument4}][{mArgument2 / mArgument4}]");
             Debug.WriteLine($"[{mArgument3}][{mArgument4}][{mArgument3 - mArgument4}][{mArgument3 / mArgument4}]");
-
-            if (mActual4)
-            {
-                Debug.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4))");
-            }
+            Debug.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4))");
 
             //assert
             Contract.Assert(mActual1);

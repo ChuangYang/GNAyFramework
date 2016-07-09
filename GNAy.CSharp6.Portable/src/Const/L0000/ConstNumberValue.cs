@@ -32,5 +32,10 @@ namespace GNAy.CSharp6.Portable.Const
         /// 1
         /// </summary>
         public const int One = 1;
+
+        /// <summary>
+        /// 2
+        /// </summary>
+        public const int Two = 1;
     }
 }

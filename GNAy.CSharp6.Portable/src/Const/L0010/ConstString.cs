@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace GNAy.CSharp6.Portable.Const
 {
     /// <summary>
-    /// ConstString
+    /// 
     /// </summary>
     public class ConstString
     {
