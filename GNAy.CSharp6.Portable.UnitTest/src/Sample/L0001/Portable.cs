@@ -29,12 +29,6 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         }
 
         /// <summary>
-        /// Initialize the static instance.
-        /// </summary>
-        public static void Initialize()
-        { }
-
-        /// <summary>
         /// 
         /// </summary>
         public Portable()
@@ -134,6 +128,15 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         /// 
         /// </summary>
         [TestMethod]
+        public void DictionaryPerformance()
+        {
+            _unitTest.DictionaryPerformance();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
         public void DateTimeDefault()
         {
             _unitTest.DateTimeDefault();
@@ -143,9 +146,9 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         /// 
         /// </summary>
         [TestMethod]
-        public void DateTimeKind1()
+        public void DateTimeKindTest()
         {
-            _unitTest.DateTimeKind1();
+            _unitTest.DateTimeKindTest();
         }
 
         /// <summary>

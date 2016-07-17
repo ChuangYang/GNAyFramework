@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 #region .NET Framework namespace.
-using System.Runtime.CompilerServices;
 #endregion
 
 #region Third party library.
@@ -51,8 +50,8 @@ namespace GNAy.CSharp6.Portable.Utility
                 return ioSource;
             }
 
-            int mHelfRight = ((int)Math.Ceiling(mCount / 2.0f) + ConstNumberValue.One);
-            int mHelfLeft = ((int)Math.Floor(mCount / 2.0f) - ConstNumberValue.One);
+            int mHelfRight = ((int)Math.Ceiling(mCount / (double)ConstNumberValue.Two) + ConstNumberValue.One);
+            int mHelfLeft = ((int)Math.Floor(mCount / (double)ConstNumberValue.Two) - ConstNumberValue.One);
 
             for (int i = ConstValue.StartIndex; i < mHelfRight; ++i)
             {
@@ -75,7 +74,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <returns></returns>
         public static IList<T> zShuffleItems<T>(this IList<T> ioSource, int iShufflingTimes = DefaultShufflingTimes)
         {
-            return zShuffleItems(ioSource, ThreadSafe.GetRandom(), iShufflingTimes);
+            return zShuffleItems(ioSource, ThreadSafeRandom.GetInstance(), iShufflingTimes);
         }
 
         /// <summary>
@@ -85,15 +84,21 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="ioRandom"></param>
         /// <param name="iShufflingTimes"></param>
-        /// <param name="iCallerMemberName"></param>
-        /// <param name="iCallerFilePath"></param>
-        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static T[] zShuffleItems<T>(this T[] ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static T[] zShuffleItems<T>(this T[] ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes)
         {
-            ThreadLocal.SaveCaller(iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+            try
+            {
+                return (T[])zShuffleItems((IList<T>)ioSource, ioRandom, iShufflingTimes);
+            }
+            catch (Exception mException)
+            {
+                mException.zSaveFunctionInfo(mException.StackTrace);
 
-            return (T[])zShuffleItems((IList<T>)ioSource, ioRandom, iShufflingTimes);
+                return ioSource;
+            }
+            finally
+            { }
         }
 
         /// <summary>
@@ -105,7 +110,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <returns></returns>
         public static T[] zShuffleItems<T>(this T[] ioSource, int iShufflingTimes = DefaultShufflingTimes)
         {
-            return zShuffleItems(ioSource, ThreadSafe.GetRandom(), iShufflingTimes);
+            return zShuffleItems(ioSource, ThreadSafeRandom.GetInstance(), iShufflingTimes);
         }
 
         /// <summary>
@@ -113,14 +118,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <param name="iCount"></param>
-        /// <param name="iCallerMemberName"></param>
-        /// <param name="iCallerFilePath"></param>
-        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static int[] zDistinctInts(this Random ioSource, ushort iCount, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static int[] zDistinctInts(this Random ioSource, ushort iCount)
         {
-            ThreadLocal.SaveCaller(iCallerMemberName, iCallerFilePath, iCallerLineNumber);
-
             int[] mResult = new int[iCount];
 
             mResult[ConstValue.StartIndex] = ioSource.Next();
@@ -148,14 +148,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="iMaxValue"></param>
         /// <param name="iCount"></param>
-        /// <param name="iCallerMemberName"></param>
-        /// <param name="iCallerFilePath"></param>
-        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static int[] zDistinctInts(this Random ioSource, int iMaxValue, ushort iCount, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static int[] zDistinctInts(this Random ioSource, int iMaxValue, ushort iCount)
         {
-            ThreadLocal.SaveCaller(iCallerMemberName, iCallerFilePath, iCallerLineNumber);
-
             int[] mResult = new int[iCount];
 
             mResult[ConstValue.StartIndex] = ioSource.Next(iMaxValue);
@@ -184,14 +179,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iMinValue"></param>
         /// <param name="iMaxValue"></param>
         /// <param name="iCount"></param>
-        /// <param name="iCallerMemberName"></param>
-        /// <param name="iCallerFilePath"></param>
-        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static int[] zDistinctInts(this Random ioSource, int iMinValue, int iMaxValue, ushort iCount, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static int[] zDistinctInts(this Random ioSource, int iMinValue, int iMaxValue, ushort iCount)
         {
-            ThreadLocal.SaveCaller(iCallerMemberName, iCallerFilePath, iCallerLineNumber);
-
             int[] mResult = new int[iCount];
 
             mResult[ConstValue.StartIndex] = ioSource.Next(iMinValue, iMaxValue);
@@ -218,14 +208,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <param name="iCount"></param>
-        /// <param name="iCallerMemberName"></param>
-        /// <param name="iCallerFilePath"></param>
-        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static byte[] zDistinctBytes(this Random ioSource, ushort iCount, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static byte[] zDistinctBytes(this Random ioSource, ushort iCount)
         {
-            ThreadLocal.SaveCaller(iCallerMemberName, iCallerFilePath, iCallerLineNumber);
-
             byte[] mResult = new byte[iCount];
 
             mResult[ConstValue.StartIndex] = (byte)ioSource.Next(byte.MaxValue + ConstNumberValue.One);
@@ -252,14 +237,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <param name="iCount"></param>
-        /// <param name="iCallerMemberName"></param>
-        /// <param name="iCallerFilePath"></param>
-        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static double[] zDistinctDoubles(this Random ioSource, ushort iCount, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static double[] zDistinctDoubles(this Random ioSource, ushort iCount)
         {
-            ThreadLocal.SaveCaller(iCallerMemberName, iCallerFilePath, iCallerLineNumber);
-
             double[] mResult = new double[iCount];
 
             mResult[ConstValue.StartIndex] = ioSource.Next();

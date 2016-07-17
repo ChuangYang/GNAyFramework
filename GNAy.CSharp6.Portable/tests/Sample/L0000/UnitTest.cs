@@ -649,6 +649,113 @@ E1E2E4");
         /// <summary>
         /// 
         /// </summary>
+        public void DictionaryPerformance()
+        {
+            //arrange
+            const int mArgument1 = (10 * 10000);
+            Stopwatch mArgument2 = new Stopwatch();
+            Dictionary<int, string> mArgument3 = new Dictionary<int, string>();
+            Dictionary<int, string> mArgument4 = new Dictionary<int, string>(mArgument1);
+            string[] mArgument5 = new string[mArgument1];
+            string mArgument6 = string.Empty;
+            long mActual1 = 0;
+            long mActual2 = 0;
+            long mActual3 = 0;
+            long mActual4 = 0;
+            long mActual5 = 0;
+            long mActual6 = 0;
+            bool mActual7 = false;
+            bool mActual8 = false;
+            bool mActual9 = false;
+
+            //act
+            //Dictionary without capacity.
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument3[i] = i.ToString();
+            }
+            mArgument2.Stop();
+            mActual1 = mArgument2.ElapsedTicks;
+
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument6 = mArgument3[i];
+            }
+            mArgument2.Stop();
+            mActual2 = mArgument2.ElapsedTicks;
+
+            Debug.WriteLine($"[{mActual1}][{mActual2}]");
+
+            //Dictionary with capacity.
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument4[i] = i.ToString();
+            }
+            mArgument2.Stop();
+            mActual3 = mArgument2.ElapsedTicks;
+
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument6 = mArgument4[i];
+            }
+            mArgument2.Stop();
+            mActual4 = mArgument2.ElapsedTicks;
+
+            Debug.WriteLine($"[{mActual3}][{mActual4}]");
+
+            //HashTable
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument5[i] = i.ToString();
+            }
+            mArgument2.Stop();
+            mActual5 = mArgument2.ElapsedTicks;
+
+            mArgument2.Reset();
+            Debug.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument6 = mArgument5[i];
+            }
+            mArgument2.Stop();
+            mActual6 = mArgument2.ElapsedTicks;
+
+            Debug.WriteLine($"[{mActual5}][{mActual6}]");
+
+            mActual7 = ((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5));
+            mActual8 = ((mActual5 < mActual1) && (mActual3 < mActual1));
+            mActual9 = ((mActual6 < mActual4) && (mActual6 < mActual2));
+
+            Debug.WriteLine("((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5))");
+            Debug.WriteLine("((mActual5 < mActual1) && (mActual3 < mActual1))");
+            Debug.WriteLine("((mActual6 < mActual4) && (mActual6 < mActual2))");
+
+            //assert
+            Contract.Assert(mActual7);
+            Contract.Assert(mActual8);
+            Contract.Assert(mActual9);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void DateTimeDefault()
         {
             //arrange
@@ -669,7 +776,7 @@ E1E2E4");
         /// <summary>
         /// 
         /// </summary>
-        public void DateTimeKind1()
+        public void DateTimeKindTest()
         {
             //arrange
             DateTime mArgument1 = DateTime.Now;
@@ -745,9 +852,6 @@ E1E2E4");
             int mArgument3 = 0;
             int mArgument4 = 0;
             bool mActual1 = false;
-            bool mActual2 = false;
-            bool mActual3 = false;
-            bool mActual4 = false;
 
             //act
             mArgument1 = DateTime.UtcNow;
@@ -769,20 +873,14 @@ E1E2E4");
             },
             1);
 
-            mActual1 = (mArgument2 > 0);
-            mActual2 = (mArgument3 > 0);
-            mActual3 = (mArgument4 > 0);
-            mActual4 = ((mArgument3 > mArgument2) && (mArgument2 > mArgument4));
+            mActual1 = ((mArgument3 > mArgument2) && (mArgument2 > mArgument4) && (mArgument4 > 0));
 
             Debug.WriteLine($"[{mArgument2}][{mArgument4}][{mArgument2 - mArgument4}][{mArgument2 / mArgument4}]");
             Debug.WriteLine($"[{mArgument3}][{mArgument4}][{mArgument3 - mArgument4}][{mArgument3 / mArgument4}]");
-            Debug.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4))");
+            Debug.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4) && (mArgument4 > 0))");
 
             //assert
             Contract.Assert(mActual1);
-            Contract.Assert(mActual2);
-            Contract.Assert(mActual3);
-            Contract.Assert(mActual4);
         }
 
 

@@ -33,12 +33,6 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         { }
 
         /// <summary>
-        /// Initialize the static instance.
-        /// </summary>
-        public static void Initialize()
-        { }
-
-        /// <summary>
         /// 
         /// </summary>
         public UnitTestSample()
@@ -686,6 +680,126 @@ E1E2E4");
         /// 
         /// </summary>
         [TestMethod]
+        public void DictionaryPerformance()
+        {
+            //arrange
+            const int mArgument1 = (10 * 10000);
+            Stopwatch mArgument2 = new Stopwatch();
+            Dictionary<int, string> mArgument3 = new Dictionary<int, string>();
+            Dictionary<int, string> mArgument4 = new Dictionary<int, string>(mArgument1);
+            string[] mArgument5 = new string[mArgument1];
+            string mArgument6 = string.Empty;
+            long mActual1 = 0;
+            long mActual2 = 0;
+            long mActual3 = 0;
+            long mActual4 = 0;
+            long mActual5 = 0;
+            long mActual6 = 0;
+            bool mActual7 = false;
+            bool mActual8 = false;
+            bool mActual9 = false;
+
+            //act
+            //Dictionary without capacity.
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument3[i] = i.ToString();
+            }
+            mArgument2.Stop();
+            mActual1 = mArgument2.ElapsedTicks;
+
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument6 = mArgument3[i];
+            }
+            mArgument2.Stop();
+            mActual2 = mArgument2.ElapsedTicks;
+
+            Console.WriteLine($"[{mActual1}][{mActual2}]");
+
+            //Dictionary with capacity.
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument4[i] = i.ToString();
+            }
+            mArgument2.Stop();
+            mActual3 = mArgument2.ElapsedTicks;
+
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument6 = mArgument4[i];
+            }
+            mArgument2.Stop();
+            mActual4 = mArgument2.ElapsedTicks;
+
+            Console.WriteLine($"[{mActual3}][{mActual4}]");
+
+            //HashTable
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument5[i] = i.ToString();
+            }
+            mArgument2.Stop();
+            mActual5 = mArgument2.ElapsedTicks;
+
+            mArgument2.Reset();
+            Console.WriteLine(mArgument2.ElapsedTicks);
+            mArgument2.Start();
+            for (int i = 0; i < mArgument1; ++i)
+            {
+                mArgument6 = mArgument5[i];
+            }
+            mArgument2.Stop();
+            mActual6 = mArgument2.ElapsedTicks;
+
+            Console.WriteLine($"[{mActual5}][{mActual6}]");
+
+            mActual7 = ((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5));
+            mActual8 = ((mActual5 < mActual1) && (mActual3 < mActual1));
+            mActual9 = ((mActual6 < mActual4) && (mActual6 < mActual2));
+
+            Console.WriteLine("((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5))");
+            Console.WriteLine("((mActual5 < mActual1) && (mActual3 < mActual1))");
+            Console.WriteLine("((mActual6 < mActual4) && (mActual6 < mActual2))");
+
+            //assert
+            Assert.IsTrue(mActual7);
+            Assert.IsTrue(mActual8);
+            Assert.IsTrue(mActual9);
+        }
+        //0
+        //0
+        //[73131][4455]
+        //0
+        //0
+        //[36037][3462]
+        //0
+        //0
+        //[34044][125]
+        //((mActual2<mActual1) && (mActual4<mActual3) && (mActual6<mActual5))
+        //((mActual5<mActual1) && (mActual3<mActual1))
+        //((mActual6<mActual4) && (mActual6<mActual2))
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
         public void DateTimeDefault()
         {
             //arrange
@@ -708,7 +822,7 @@ E1E2E4");
         /// 
         /// </summary>
         [TestMethod]
-        public void DateTimeKind1()
+        public void DateTimeKindTest()
         {
             //arrange
             DateTime mArgument1 = DateTime.Now;
@@ -799,9 +913,6 @@ E1E2E4");
             int mArgument3 = 0;
             int mArgument4 = 0;
             bool mActual1 = false;
-            bool mActual2 = false;
-            bool mActual3 = false;
-            bool mActual4 = false;
 
             //act
             mArgument1 = DateTime.UtcNow;
@@ -823,20 +934,14 @@ E1E2E4");
             },
             1);
 
-            mActual1 = (mArgument2 > 0);
-            mActual2 = (mArgument3 > 0);
-            mActual3 = (mArgument4 > 0);
-            mActual4 = ((mArgument3 > mArgument2) && (mArgument2 > mArgument4));
+            mActual1 = ((mArgument3 > mArgument2) && (mArgument2 > mArgument4) && (mArgument4 > 0));
 
             Console.WriteLine($"[{mArgument2}][{mArgument4}][{mArgument2 - mArgument4}][{mArgument2 / mArgument4}]");
             Console.WriteLine($"[{mArgument3}][{mArgument4}][{mArgument3 - mArgument4}][{mArgument3 / mArgument4}]");
-            Console.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4))");
+            Console.WriteLine("((mArgument3 > mArgument2) && (mArgument2 > mArgument4) && (mArgument4 > 0))");
 
             //assert
             Assert.IsTrue(mActual1);
-            Assert.IsTrue(mActual2);
-            Assert.IsTrue(mActual3);
-            Assert.IsTrue(mActual4);
         }
         //[83161]
         //[70]
@@ -846,7 +951,7 @@ E1E2E4");
         //[70]
         //[121529]
         //[1737]
-        //((mArgument3 > mArgument2) && (mArgument2 > mArgument4))
+        //((mArgument3 > mArgument2) && (mArgument2 > mArgument4) && (mArgument4 > 0))
 
 
         /// <summary>
