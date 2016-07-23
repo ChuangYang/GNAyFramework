@@ -32,12 +32,6 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         static UnitTestSample()
         { }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public UnitTestSample()
-        { }
-
         //[TestMethod]
         //public void TestMethodSample()
         //{
@@ -188,11 +182,9 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
             Assert.IsFalse(mActual4);
         }
         //0
-        //[8886]
-        //[1125]
+        //[22446][445]
         //0
-        //[9398]
-        //[1064]
+        //[20156][496]
 
 
         /// <summary>
@@ -239,11 +231,9 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
             Assert.IsTrue(mActual4);
         }
         //0
-        //[45113]
-        //[221]
+        //[57372][174]
         //0
-        //[53843]
-        //[185]
+        //[52181][191]
 
 
         /// <summary>
@@ -569,19 +559,11 @@ E1E2E4");
             Assert.IsTrue(mActual3);
         }
         //0
-        //[operator ==]
-        //[True]
-        //[13535]
-        //[738]
+        //[operator ==][True][9140][1094]
         //0
-        //[object.ReferenceEquals][True]
-        //[13009]
-        //[768]
+        //[object.ReferenceEquals][True][9181][1089]
         //0
-        //[isNull]
-        //[True]
-        //[13217]
-        //[756]
+        //[isNull][True][9277][1077]
 
 
         /// <summary>
@@ -618,12 +600,7 @@ E1E2E4");
             Assert.IsTrue(mActual5);
             Assert.IsFalse(mActual6);
         }
-        //[12True]
-        //[12True]
-        //[12True]
-        //[True]
-        //[True]
-        //[False]
+        //[12True][12True][12True][True][True][False]
 
 
         private struct _classAndStructureTest
@@ -784,16 +761,16 @@ E1E2E4");
         }
         //0
         //0
-        //[73131][4455]
+        //[98238][3465]
         //0
         //0
-        //[36037][3462]
+        //[36616][3547]
         //0
         //0
-        //[34044][125]
-        //((mActual2<mActual1) && (mActual4<mActual3) && (mActual6<mActual5))
-        //((mActual5<mActual1) && (mActual3<mActual1))
-        //((mActual6<mActual4) && (mActual6<mActual2))
+        //[33189][84]
+        //((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5))
+        //((mActual5 < mActual1) && (mActual3 < mActual1))
+        //((mActual6 < mActual4) && (mActual6 < mActual2))
 
 
         /// <summary>
@@ -853,14 +830,8 @@ E1E2E4");
             Assert.IsTrue(mActual2);
             Assert.IsFalse(mActual3);
         }
-        //[2016/6/6 下午 04:04:19]
-        //[2016/6/6 下午 04:04:19]
-        //[2016/6/6 下午 04:04:19]
-        //[2016/6/6 下午 04:04:19]
-        //[2016/6/6 上午 08:04:19]
-        //[2016/6/6 上午 08:04:19]
-        //[2016/6/6 上午 08:04:19]
-        //[2016/6/7 上午 12:04:19]
+        //[2016/7/23 下午 04:48:48][2016/7/23 下午 04:48:48][2016/7/23 下午 04:48:48][2016/7/23 下午 04:48:48]
+        //[2016/7/23 上午 08:48:48][2016/7/23 上午 08:48:48][2016/7/23 上午 08:48:48][2016/7/24 上午 12:48:48]
 
 
         /// <summary>
@@ -894,10 +865,8 @@ E1E2E4");
             Assert.IsTrue(mActual1);
             Assert.IsTrue(mActual2);
         }
-        //60034
-        //[636007970598508972]
-        //[636007970598518986]
-        //[10014]
+        //42504
+        //[636048605288319786][636048605288324816][5030]
 
 
         /// <summary>
@@ -943,14 +912,8 @@ E1E2E4");
             //assert
             Assert.IsTrue(mActual1);
         }
-        //[83161]
-        //[70]
-        //[83091]
-        //[1188]
-        //[121599]
-        //[70]
-        //[121529]
-        //[1737]
+        //[72499][90][72409][805]
+        //[94475][90][94385][1049]
         //((mArgument3 > mArgument2) && (mArgument2 > mArgument4) && (mArgument4 > 0))
 
 
@@ -1113,25 +1076,20 @@ E1E2E4");
             Assert.IsTrue(mActual5);
             Assert.IsTrue(mActual6);
         }
-        //[{S}][3]
-        //    [3]
-        //    [SSS{0}
-        //SSS][1]
-
-        //[SSS{S]
-        //[0]
-
+        //[{S}][3][3]
+        //[SSS{0}SSS][1]
+        //
+        //[SSS{S][0]
+        //
         //[SS}S{S][0]
-
-        //[{{S}][3]
-        //[4]
+        //
+        //[{{S}][3][4]
         //[SSS{{0}}SSS][1]
-
+        //
         //[{S:####}][3][8]
         //[SSS{0:####}SSS][1]
-
-        //[{{s}][2]
-        //[4]
+        //
+        //[{{s}][2][4]
         //[{S:####}][15][8]
         //[SS{{0}}SS{Sa}SS{1:####}SS][2]
 
@@ -1264,36 +1222,19 @@ E1E2E4");
             Assert.IsTrue(mActual8);
         }
         //0
-        //[Normal function call]
-        //        [1000000]
-        //        [5159]
-        //        [193]
+        //[Normal function call][1000000][5681][176]
         //0
-        //[Normal delegate][1000000]
-        //        [5992]
-        //        [166]
+        //[Normal delegate][1000000][7152][139]
         //0
-        //[Delegate.CreateDelegate]
-        //        [1000000]
-        //        [4499]
-        //        [222]
+        //[Delegate.CreateDelegate][1000000][5143][194]
         //0
-        //[Expression.Call]
-        //        [1000000]
-        //        [32592]
-        //        [30]
+        //[Expression.Call][1000000][38939][25]
         //0
-        //[Expression.Add]
-        //        [1000000]
-        //        [8781]
-        //        [113]
+        //[Expression.Add][1000000][4736][211]
         //0
-        //[Expression.Increment]
-        //        [1000000]
-        //        [5411]
-        //        [184]
+        //[Expression.Increment][1000000][5620][177]
         //0
-        //((mActual3<mActual2) && (mActual2<mActual4) && (mActual5<mActual4) && (mActual6<mActual4) && (mActual1<mActual4))
+        //((mActual3 < mActual2) && (mActual2 < mActual4) && (mActual5 < mActual4) && (mActual6 < mActual4) && (mActual1 < mActual4))
 
 
         /// <summary>
@@ -1422,34 +1363,18 @@ E1E2E4");
             Assert.IsTrue(mActual8);
         }
         //0
-        //[Normal function call]
-        //        [1000000]
-        //        [3516]
-        //        [284]
+        //[Normal function call][1000000][4652][214]
         //0
-        //[Normal delegate: 1][1000000]
-        //        [8131]
-        //        [122]
+        //[Normal delegate: 1][1000000][7461][134]
         //0
-        //[Delegate.CreateDelegate: 1]
-        //        [1000000]
-        //        [7210]
-        //        [138]
+        //[Delegate.CreateDelegate: 1][1000000][7309][136]
         //0
-        //[Normal delegate: 2][1000000]
-        //        [10136]
-        //        [98]
+        //[Normal delegate: 2][1000000][8284][120]
         //0
-        //[Delegate.CreateDelegate: 2]
-        //        [1000000]
-        //        [9028]
-        //        [110]
+        //[Delegate.CreateDelegate: 2][1000000][6709][149]
         //0
-        //[Expression.Call]
-        //        [1000000]
-        //        [36759]
-        //        [27]
+        //[Expression.Call][1000000][37428][26]
         //0
-        //((mActual1<mActual3) && (mActual3<mActual2) && (mActual2<mActual6) && (mActual1<mActual5) && (mActual5<mActual4) && (mActual4<mActual6))
+        //((mActual1 < mActual3) && (mActual3 < mActual2) && (mActual2 < mActual6) && (mActual1 < mActual5) && (mActual5 < mActual4) && (mActual4 < mActual6))
     }
 }

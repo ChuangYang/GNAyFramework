@@ -93,7 +93,7 @@ namespace GNAy.CSharp6.Portable.Utility
             }
             catch (Exception mException)
             {
-                mException.zSaveFunctionInfo(mException.StackTrace);
+                mException.zSaveFuncInfo(mException.StackTrace);
 
                 return ioSource;
             }

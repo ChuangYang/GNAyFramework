@@ -45,12 +45,6 @@ namespace GNAy.CSharp6.Portable.Tests.Sample
             throw new Exception(e.Message);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public UnitTest()
-        { }
-
         //public void TestMethodSample()
         //{
         //    //arrange

@@ -27,12 +27,6 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
         {
             _unitTest = new CSharp6.Portable.Tests.Sample.UnitTest();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Portable()
-        { }
         
         /// <summary>
         /// 

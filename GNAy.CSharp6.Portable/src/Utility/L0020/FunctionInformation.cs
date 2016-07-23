@@ -38,7 +38,12 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <summary>
         /// 
         /// </summary>
-        public readonly int UniqueNumber;
+        public readonly int UniqueThreadNumber;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public readonly int UniqueFuncNumber;
 
         /// <summary>
         /// 
@@ -91,7 +96,7 @@ namespace GNAy.CSharp6.Portable.Utility
             FilePath = iCallerFilePath;
             LineNumber = iCallerLineNumber;
 
-            UniqueNumber = (ThreadUniqueNumber.GetNumber() ^ Name.GetHashCode() ^ FilePath.GetHashCode());
+            UniqueFuncNumber = (ThreadUniqueNumber.GetNumber() ^ Name.GetHashCode() ^ FilePath.GetHashCode());
 
             Exception = null;
             ExceptionStackTrace = ConstString.Empty;
@@ -115,7 +120,8 @@ namespace GNAy.CSharp6.Portable.Utility
             FilePath = iCallerFilePath;
             LineNumber = iCallerLineNumber;
 
-            UniqueNumber = (ThreadUniqueNumber.GetNumber() ^ Name.GetHashCode() ^ FilePath.GetHashCode());
+            UniqueThreadNumber = ThreadUniqueNumber.GetNumber();
+            UniqueFuncNumber = (UniqueThreadNumber ^ Name.GetHashCode() ^ FilePath.GetHashCode());
 
             Exception = ioException;
             ExceptionStackTrace = iExceptionStackTrace;
