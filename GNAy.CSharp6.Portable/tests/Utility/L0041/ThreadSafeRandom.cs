@@ -38,8 +38,8 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
         /// </summary>
         public void CheckSeedValuesNoDuplicate()
         {
-            const int mLoopTimes = 20;
-            const int mParallelCount = 20;
+            const int mLoopTimes = ConstNumberValue.Twenty;
+            const int mParallelCount = ConstNumberValue.Twenty;
 
             //arrange
             bool mActual1 = false;
@@ -82,8 +82,8 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
         /// </summary>
         public void PrintTimeAndThreadAndValue()
         {
-            const int mLoopTimes = 5;
-            const int mParallelCount = 10;
+            const int mLoopTimes = ConstNumberValue.Five;
+            const int mParallelCount = ConstNumberValue.Ten;
 
             //arrange
             bool mActual1 = false;

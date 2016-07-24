@@ -39,7 +39,7 @@ T:   Type or Generic
 
 z:   Extension Method
 
-m:   The parameter created in the method (exception: i, j, k¡K).
+m:   The parameter declared in the method (exception: i, j, k¡K).
 i:   The input parameter of the method.
 o:   The output parameter of the method.
 io:  The parameter that has the input and output abilities, so the name of reference type should be started with "io".

@@ -24,7 +24,8 @@ namespace GNAy.CSharp6.Portable.Utility
     public static class ObjectHelper
     {
         /// <summary>
-        /// 
+        /// <para>Equals may be overridden.</para>
+        /// <para>Structure may be nullable or be boxed like an object class.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ioSource"></param>
@@ -35,7 +36,8 @@ namespace GNAy.CSharp6.Portable.Utility
         }
 
         /// <summary>
-        /// 
+        /// <para>Equals may be overridden.</para>
+        /// <para>Structure may be nullable or be boxed like an object class.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ioSource"></param>

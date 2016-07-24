@@ -37,5 +37,20 @@ namespace GNAy.CSharp6.Portable.Const
         /// 2
         /// </summary>
         public const string Two = "2";
+
+        /// <summary>
+        /// 5
+        /// </summary>
+        public const string Five = "5";
+
+        /// <summary>
+        /// 10
+        /// </summary>
+        public const string Ten = "10";
+
+        /// <summary>
+        /// 20
+        /// </summary>
+        public const string Twenty = "20";
     }
 }

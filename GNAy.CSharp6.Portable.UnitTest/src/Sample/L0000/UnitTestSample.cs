@@ -4,7 +4,6 @@ using System.Collections.Generic;
 #region .NET Framework namespace.
 using System;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
@@ -783,16 +782,22 @@ E1E2E4");
             DateTime mArgument1 = DateTime.MinValue;
             DateTime mArgument2 = default(DateTime);
             bool mActual1 = false;
+            bool mActual2 = false;
+            bool mActual3 = false;
 
             //act
             mActual1 = (mArgument1 == mArgument2);
+            mActual2 = (mArgument1.Ticks == mArgument2.Ticks);
+            mActual3 = (mArgument1.Kind == mArgument2.Kind);
 
-            Console.WriteLine(mArgument1);
+            Console.WriteLine($"[{mArgument1}][{mArgument1.Ticks}][{mArgument1.Kind}]");
+            Console.WriteLine($"[{mArgument2}][{mArgument2.Ticks}][{mArgument2.Kind}]");
 
             //assert
             Assert.IsTrue(mActual1);
         }
-        //01/01/0001 00:00:00
+        //[0001/1/1 上午 12:00:00][0][Unspecified]
+        //[0001/1/1 上午 12:00:00][0][Unspecified]
 
 
         /// <summary>
@@ -873,7 +878,6 @@ E1E2E4");
         /// 
         /// </summary>
         [TestMethod]
-        [ContractVerification(false)]
         public void WhileCount()
         {
             //arrange
