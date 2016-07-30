@@ -16,7 +16,11 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
-namespace GNAy.CSharp6.Portable.Interface
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0000_ICreation
+#else
+namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 

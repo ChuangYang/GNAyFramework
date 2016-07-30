@@ -16,33 +16,27 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0000_IDisposable
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class GlobalData
+    public interface IDisposition : IDisposable
     {
         /// <summary>
         /// 
         /// </summary>
-        public static readonly DateTime CreationTime;
+        /// <returns></returns>
+        DateTime GetDispositionTime();
 
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Guid Guid;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static readonly int UniqueNumber;
-
-        static GlobalData()
-        {
-            CreationTime = DateTime.UtcNow;
-            Guid = Guid.NewGuid();
-            UniqueNumber = (CreationTime.GetHashCode() ^ Guid.GetHashCode());
-        }
+        /// <returns></returns>
+        bool IsDisposed();
     }
 }

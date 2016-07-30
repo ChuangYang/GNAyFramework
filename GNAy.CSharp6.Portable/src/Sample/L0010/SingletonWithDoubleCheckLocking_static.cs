@@ -11,13 +11,21 @@ using System.Threading.Tasks;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Utility.L0000_ObjectHelper;
+#else
 using GNAy.CSharp6.Portable.Utility;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Sample.L0010_SingletonWithDoubleCheckLocking
+#else
 namespace GNAy.CSharp6.Portable.Sample
+#endif
 {
     /// <summary>
     /// 
@@ -26,29 +34,6 @@ namespace GNAy.CSharp6.Portable.Sample
     {
         private static readonly object _syncRoot;
         private static volatile SingletonWithDoubleCheckLocking _instance;
-
-        /// <summary>
-        /// Get the thread-safe singleton object.
-        /// </summary>
-        /// <returns></returns>
-        public static SingletonWithDoubleCheckLocking Instance //Lazy initialization.
-        {
-            get
-            {
-                if (_instance.zIsNull())
-                {
-                    lock (_syncRoot) //Double-Check Locking
-                    {
-                        if (_instance.zIsNull())
-                        {
-                            _instance = new SingletonWithDoubleCheckLocking();
-                        }
-                    }
-                }
-
-                return _instance;
-            }
-        }
 
         static SingletonWithDoubleCheckLocking() //The CLR guarantees that the static constructor will be invoked only once for the entire lifetime of the application domain.
         {
@@ -63,6 +48,26 @@ namespace GNAy.CSharp6.Portable.Sample
         public static bool IsInstanceCreated()
         {
             return _instance.zIsNotNull();
+        }
+
+        /// <summary>
+        /// Get the thread-safe singleton object.
+        /// </summary>
+        /// <returns></returns>
+        public static SingletonWithDoubleCheckLocking GetInstance() //Lazy initialization.
+        {
+            if (_instance.zIsNull())
+            {
+                lock (_syncRoot) //Double-Check Locking
+                {
+                    if (_instance.zIsNull())
+                    {
+                        _instance = new SingletonWithDoubleCheckLocking();
+                    }
+                }
+            }
+
+            return _instance;
         }
     }
 }

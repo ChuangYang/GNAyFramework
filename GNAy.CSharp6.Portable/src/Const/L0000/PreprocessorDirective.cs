@@ -16,7 +16,11 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Const.L0000_PreprocessorDirective
+#else
 namespace GNAy.CSharp6.Portable.Const
+#endif
 {
     /// <summary>
     /// ConditionalAttribute.ConditionString
@@ -24,19 +28,14 @@ namespace GNAy.CSharp6.Portable.Const
     public class PreprocessorDirective
     {
         /// <summary>
-        /// "MergeToDotNetNamespace"
+        /// "Development"
         /// </summary>
-        public const string MergeToDotNetNamespace = "MergeToDotNetNamespace";
+        public const string Development = "Development";
 
-        /// <summary>
-        /// "StandAlong"
-        /// </summary>
-        public const string StandAlong = "StandAlong";
-
-        /// <summary>
-        /// "ByConfig"
-        /// </summary>
-        public const string ByConfig = "ByConfig";
+        ///// <summary>
+        ///// "MergeToDotNetNamespace"
+        ///// </summary>
+        //public const string MergeToDotNetNamespace = "MergeToDotNetNamespace";
 
         /// <summary>
         /// "UTCTTime"
@@ -47,5 +46,15 @@ namespace GNAy.CSharp6.Portable.Const
         /// "LocalTime"
         /// </summary>
         public const string LocalTime = "LocalTime";
+
+        ///// <summary>
+        ///// "StandAlong"
+        ///// </summary>
+        //public const string StandAlong = "StandAlong";
+
+        ///// <summary>
+        ///// "ByConfig"
+        ///// </summary>
+        //public const string ByConfig = "ByConfig";
     }
 }

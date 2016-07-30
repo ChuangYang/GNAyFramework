@@ -12,38 +12,50 @@ using System.Runtime.CompilerServices;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0010_ConstString;
+using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
+using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
+using GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation;
+#else
 using GNAy.CSharp6.Portable.Const;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0030_MemberInformation
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public class FunctionInformation
+    public class MemberInformation
     {
         /// <summary>
         /// 
         /// </summary>
-        public readonly DateTime TagTime;
+        public readonly DateTime CreationTime;
 
         /// <summary>
         /// 
         /// </summary>
-        public readonly EFunctionStatus Status;
+        public readonly EMemberStatus Status;
 
         /// <summary>
         /// 
         /// </summary>
-        public readonly int UniqueThreadNumber;
+        public readonly int UniqueThreadID;
 
         /// <summary>
         /// 
         /// </summary>
-        public readonly int UniqueFuncNumber;
+        public readonly int UniqueMemberID;
 
         /// <summary>
         /// 
@@ -77,18 +89,18 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iCallerMemberName"></param>
         /// <param name="iCallerFilePath"></param>
         /// <param name="iCallerLineNumber"></param>
-        public FunctionInformation(EFunctionStatus iStatus, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public MemberInformation(EMemberStatus iStatus, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
-            if (iStatus == EFunctionStatus.Unknown)
+            if (iStatus == EMemberStatus.Unknown)
             {
-                throw new ArgumentException("iStatus == EFunctionStatus.Unknown");
+                throw new ArgumentException("iStatus == EMemberStatus.Unknown");
             }
-            else if (iStatus == EFunctionStatus.HasException)
+            else if (iStatus == EMemberStatus.HasException)
             {
-                throw new ArgumentException("iStatus == EFunctionStatus.HasException");
+                throw new ArgumentException("iStatus == EMemberStatus.HasException");
             }
 
-            TagTime = DateTime.UtcNow;
+            CreationTime = TimeHelper.GetTimeNowByPreprocessor();
 
             Status = iStatus;
 
@@ -96,7 +108,8 @@ namespace GNAy.CSharp6.Portable.Utility
             FilePath = iCallerFilePath;
             LineNumber = iCallerLineNumber;
 
-            UniqueFuncNumber = (ThreadUniqueNumber.GetNumber() ^ Name.GetHashCode() ^ FilePath.GetHashCode());
+            UniqueThreadID = ThreadLocalInformation.GetUniqueID();
+            UniqueMemberID = (UniqueThreadID ^ Name.GetHashCode() ^ FilePath.GetHashCode());
 
             Exception = null;
             ExceptionStackTrace = ConstString.Empty;
@@ -110,18 +123,18 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iCallerMemberName"></param>
         /// <param name="iCallerFilePath"></param>
         /// <param name="iCallerLineNumber"></param>
-        public FunctionInformation(Exception ioException, string iExceptionStackTrace, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public MemberInformation(Exception ioException, string iExceptionStackTrace, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
-            TagTime = DateTime.UtcNow;
+            CreationTime = TimeHelper.GetTimeNowByPreprocessor();
 
-            Status = EFunctionStatus.HasException;
+            Status = EMemberStatus.HasException;
 
             Name = iCallerMemberName;
             FilePath = iCallerFilePath;
             LineNumber = iCallerLineNumber;
 
-            UniqueThreadNumber = ThreadUniqueNumber.GetNumber();
-            UniqueFuncNumber = (UniqueThreadNumber ^ Name.GetHashCode() ^ FilePath.GetHashCode());
+            UniqueThreadID = ThreadLocalInformation.GetUniqueID();
+            UniqueMemberID = (UniqueThreadID ^ Name.GetHashCode() ^ FilePath.GetHashCode());
 
             Exception = ioException;
             ExceptionStackTrace = iExceptionStackTrace;

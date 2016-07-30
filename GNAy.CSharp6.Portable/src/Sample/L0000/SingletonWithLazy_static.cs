@@ -16,7 +16,11 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Sample.L0000_SingletonWithLazy
+#else
 namespace GNAy.CSharp6.Portable.Sample
+#endif
 {
     /// <summary>
     /// 
@@ -24,18 +28,6 @@ namespace GNAy.CSharp6.Portable.Sample
     internal partial class SingletonWithLazy
     {
         private static readonly Lazy<SingletonWithLazy> _instance;
-
-        /// <summary>
-        /// Get the thread-safe singleton object.
-        /// </summary>
-        /// <returns></returns>
-        public static SingletonWithLazy Instance //Lazy initialization.
-        {
-            get
-            {
-                return _instance.Value;
-            }
-        }
 
         static SingletonWithLazy() //The CLR guarantees that the static constructor will be invoked only once for the entire lifetime of the application domain.
         {
@@ -49,6 +41,15 @@ namespace GNAy.CSharp6.Portable.Sample
         public static bool IsInstanceCreated()
         {
             return _instance.IsValueCreated;
+        }
+
+        /// <summary>
+        /// Get the thread-safe singleton object.
+        /// </summary>
+        /// <returns></returns>
+        public static SingletonWithLazy GetInstance() //Lazy initialization.
+        {
+            return _instance.Value;
         }
     }
 }

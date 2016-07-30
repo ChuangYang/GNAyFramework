@@ -12,27 +12,37 @@ using System.Threading;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Information.L0010_LibraryInformation;
+using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
+#else
+using GNAy.CSharp6.Portable.Information;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class ThreadUniqueNumber
+    public static class ThreadLocalInformation
     {
         private static readonly ThreadLocal<DateTime> _creationTime;
         private static readonly ThreadLocal<Guid> _guid;
-        private static readonly ThreadLocal<int> _uniqueNumber;
+        private static readonly ThreadLocal<int> _uniqueID;
 
-        static ThreadUniqueNumber()
+        static ThreadLocalInformation()
         {
-            _creationTime = new ThreadLocal<DateTime>(() => DateTime.UtcNow, true);
+            _creationTime = new ThreadLocal<DateTime>(() => TimeHelper.GetTimeNowByPreprocessor(), true);
             _guid = new ThreadLocal<Guid>(() => Guid.NewGuid(), true);
-            _uniqueNumber = new ThreadLocal<int>(() => (GlobalData.UniqueNumber ^ _creationTime.Value.GetHashCode() ^ _guid.Value.GetHashCode()), true);
+            _uniqueID = new ThreadLocal<int>(() => (LibraryInformation.UniqueID ^ _creationTime.Value.GetHashCode() ^ _guid.Value.GetHashCode()), true);
         }
 
         /// <summary>
@@ -57,9 +67,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// 
         /// </summary>
         /// <returns></returns>
-        public static int GetNumber()
+        public static int GetUniqueID()
         {
-            return _uniqueNumber.Value;
+            return _uniqueID.Value;
         }
 
         /// <summary>
@@ -84,9 +94,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// 
         /// </summary>
         /// <returns></returns>
-        internal static IList<int> GetNumberValues()
+        internal static IList<int> GetUniqueIDValues()
         {
-            return _uniqueNumber.Values;
+            return _uniqueID.Values;
         }
     }
 }

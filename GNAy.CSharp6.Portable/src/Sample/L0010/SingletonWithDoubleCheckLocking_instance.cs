@@ -16,7 +16,11 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Sample.L0010_SingletonWithDoubleCheckLocking
+#else
 namespace GNAy.CSharp6.Portable.Sample
+#endif
 {
     /// <summary>
     /// 

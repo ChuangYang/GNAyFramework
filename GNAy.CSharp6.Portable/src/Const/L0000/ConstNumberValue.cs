@@ -16,7 +16,11 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue
+#else
 namespace GNAy.CSharp6.Portable.Const
+#endif
 {
     /// <summary>
     /// 

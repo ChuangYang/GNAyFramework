@@ -11,12 +11,21 @@ using System.Threading.Tasks;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberString;
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0000_PreprocessorDirective;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Const.Alias.L0001
+#else
 namespace GNAy.CSharp6.Portable.Const.Alias
+#endif
 {
     /// <summary>
     /// ConstNumberValue

@@ -11,13 +11,24 @@ using System.Threading.Tasks;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
+using GNAy.CSharp6.Portable.Utility.L0030_ThreadSafeRandom;
+using GNAy.CSharp6.Portable.Utility.L0040_ThreadLocalFunctionObserver;
+#else
 using GNAy.CSharp6.Portable.Const;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0050_RandomHelper
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 

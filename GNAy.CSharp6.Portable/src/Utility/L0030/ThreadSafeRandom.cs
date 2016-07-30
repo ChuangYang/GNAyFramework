@@ -12,13 +12,23 @@ using System.Threading;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
+using GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation;
+#else
 using GNAy.CSharp6.Portable.Const;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0030_ThreadSafeRandom
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
@@ -29,7 +39,7 @@ namespace GNAy.CSharp6.Portable.Utility
 
         static ThreadSafeRandom()
         {
-            _localRandom = new ThreadLocal<Random>(() => new Random(ThreadUniqueNumber.GetNumber()), true);
+            _localRandom = new ThreadLocal<Random>(() => new Random(ThreadLocalInformation.GetUniqueID()), true);
         }
 
         /// <summary>
@@ -47,9 +57,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <returns></returns>
         public static bool CheckSeedValuesNoDuplicate()
         {
-            for (int i = ConstValue.StartIndex; i < (ThreadUniqueNumber.GetNumberValues().Count - ConstNumberValue.One); ++i)
+            for (int i = ConstValue.StartIndex; i < (ThreadLocalInformation.GetUniqueIDValues().Count - ConstNumberValue.One); ++i)
             {
-                for (int j = (i + ConstNumberValue.One); j < ThreadUniqueNumber.GetNumberValues().Count; ++j)
+                for (int j = (i + ConstNumberValue.One); j < ThreadLocalInformation.GetUniqueIDValues().Count; ++j)
                 {
                     if (j == i)
                     {

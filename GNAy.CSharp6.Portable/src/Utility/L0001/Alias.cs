@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 
 #region GNAy namespace.
 #if Development
-using GNAy.CSharp6.Portable.Const.L0010_ConstString;
-using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
+using GNAy.CSharp6.Portable.Utility.L0000_CommonEvent;
 #endif
 #endregion
 
@@ -21,22 +20,15 @@ using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Const.Alias.L0011
+namespace GNAy.CSharp6.Portable.Utility.Alias.L0001
 #else
-namespace GNAy.CSharp6.Portable.Const.Alias
+namespace GNAy.CSharp6.Portable.Utility.Alias
 #endif
 {
     /// <summary>
-    /// ConstValue
+    /// CommonEvent
     /// </summary>
-    public class CV : ConstValue
-    {
-    }
-
-    /// <summary>
-    /// ConstString
-    /// </summary>
-    public class CS : ConstString
+    public class CE : CommonEvent
     {
     }
 }

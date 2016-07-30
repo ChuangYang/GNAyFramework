@@ -12,47 +12,56 @@ using System.Runtime.CompilerServices;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0010_ConstString;
+#else
 using GNAy.CSharp6.Portable.Const;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0030_CallerService
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class CallerMember
+    public static class CallerService
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="iCallerMemberName"></param>
+        /// <param name="iName"></param>
         /// <returns></returns>
-        public static string GetThisFunctionName([CallerMemberName] string iCallerMemberName = ConstString.Empty)
+        public static string GetThisMemberName([CallerMemberName] string iName = ConstString.Empty)
         {
-            return iCallerMemberName;
+            return iName;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="iCallerFilePath"></param>
+        /// <param name="iPath"></param>
         /// <returns></returns>
-        public static string GetThisFilePath([CallerFilePath] string iCallerFilePath = ConstString.Empty)
+        public static string GetThisFilePath([CallerFilePath] string iPath = ConstString.Empty)
         {
-            return iCallerFilePath;
+            return iPath;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="iCallerLineNumber"></param>
+        /// <param name="iNumber"></param>
         /// <returns></returns>
-        public static int GetThisLineNumber([CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static int GetThisLineNumber([CallerLineNumber] int iNumber = ConstNumberValue.Zero)
         {
-            return iCallerLineNumber;
+            return iNumber;
         }
     }
 }

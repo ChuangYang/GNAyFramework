@@ -13,19 +13,31 @@ using System.Collections.Generic;
 #region Alias.
 #endregion
 
-namespace GNAy.CSharp6.Portable.UnitTest.ThreadSafeRandom
+#if Development
+namespace GNAy.CSharp6.Portable.UnitTest.Utility.L0042_ThreadSafeRandom
+#else
+namespace GNAy.CSharp6.Portable.UnitTest.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
     [TestClass]
-    public class Portable
+    public class ThreadSafeRandom
     {
+#if Development
+        private static CSharp6.Portable.Tests.Utility.L0041_ThreadSafeRandom.ThreadSafeRandom _threadSafeRandom;
+#else
         private static CSharp6.Portable.Tests.Utility.ThreadSafeRandom _threadSafeRandom;
+#endif
 
-        static Portable()
+        static ThreadSafeRandom()
         {
+#if Development
+            _threadSafeRandom = new CSharp6.Portable.Tests.Utility.L0041_ThreadSafeRandom.ThreadSafeRandom();
+#else
             _threadSafeRandom = new CSharp6.Portable.Tests.Utility.ThreadSafeRandom();
+#endif
         }
 
         ///// <summary>

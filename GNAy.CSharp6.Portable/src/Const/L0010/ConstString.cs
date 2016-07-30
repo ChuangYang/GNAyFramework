@@ -11,12 +11,19 @@ using System.Threading.Tasks;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberString;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Const.L0010_ConstString
+#else
 namespace GNAy.CSharp6.Portable.Const
+#endif
 {
     /// <summary>
     /// 

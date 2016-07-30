@@ -16,23 +16,35 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
-namespace GNAy.CSharp6.Portable.Interface
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus
+#else
+namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface IDisposition : IDisposable
+    public enum EMemberStatus
     {
         /// <summary>
-        /// 
+        /// 0
         /// </summary>
-        /// <returns></returns>
-        DateTime GetDispositionTime();
+        Unknown,
 
         /// <summary>
-        /// 
+        /// 1
         /// </summary>
-        /// <returns></returns>
-        bool IsDisposed();
+        IsRunning,
+
+        /// <summary>
+        /// 2
+        /// </summary>
+        IsFinished,
+
+        /// <summary>
+        /// 3
+        /// </summary>
+        HasException,
     }
 }

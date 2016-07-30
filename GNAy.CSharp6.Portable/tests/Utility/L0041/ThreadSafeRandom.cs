@@ -13,15 +13,30 @@ using System.Diagnostics.Contracts;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
+using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
+using GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation;
+#else
 using GNAy.CSharp6.Portable.Const;
 using GNAy.CSharp6.Portable.Utility;
+#endif
 #endregion
 
 #region Alias.
+#if Development
+using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Utility.L0030_ThreadSafeRandom.ThreadSafeRandom;
+#else
 using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Utility.ThreadSafeRandom;
+#endif
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Tests.Utility.L0041_ThreadSafeRandom
+#else
 namespace GNAy.CSharp6.Portable.Tests.Utility
+#endif
 {
     /// <summary>
     /// <para>Don't use GNAy.CSharp6.Portable.Tests.Utility.</para>
@@ -30,7 +45,11 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
     {
         static ThreadSafeRandom()
         {
+#if Development
+            CSharp6.Portable.Tests.Sample.L0000_UnitTest.UnitTest.Initialize();
+#else
             CSharp6.Portable.Tests.Sample.UnitTest.Initialize();
+#endif
         }
 
         /// <summary>
@@ -55,19 +74,19 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             mActual1 = PortableThreadSafeRandom.CheckSeedValuesNoDuplicate();
 
-            Debug.WriteLine($"[{ThreadUniqueNumber.GetCreationTimeValues().Count}][{string.Join(", ", ThreadUniqueNumber.GetCreationTimeValues())}]");
-            Debug.WriteLine($"[{ThreadUniqueNumber.GetGuidValues().Count}][{string.Join(", ", ThreadUniqueNumber.GetGuidValues())}]");
-            Debug.WriteLine($"[{ThreadUniqueNumber.GetNumberValues().Count}][{string.Join(", ", ThreadUniqueNumber.GetNumberValues())}]");
+            Debug.WriteLine($"[{ThreadLocalInformation.GetCreationTimeValues().Count}][{string.Join(", ", ThreadLocalInformation.GetCreationTimeValues())}]");
+            Debug.WriteLine($"[{ThreadLocalInformation.GetGuidValues().Count}][{string.Join(", ", ThreadLocalInformation.GetGuidValues())}]");
+            Debug.WriteLine($"[{ThreadLocalInformation.GetUniqueIDValues().Count}][{string.Join(", ", ThreadLocalInformation.GetUniqueIDValues())}]");
 
             if (!mActual1)
             {
-                for (int i = ConstValue.StartIndex; i < (ThreadUniqueNumber.GetNumberValues().Count - ConstNumberValue.One); ++i)
+                for (int i = ConstValue.StartIndex; i < (ThreadLocalInformation.GetUniqueIDValues().Count - ConstNumberValue.One); ++i)
                 {
-                    for (int j = (i + ConstNumberValue.One); j < ThreadUniqueNumber.GetNumberValues().Count; ++j)
+                    for (int j = (i + ConstNumberValue.One); j < ThreadLocalInformation.GetUniqueIDValues().Count; ++j)
                     {
                         if (j == i)
                         {
-                            Debug.WriteLine($"[{i}][{j}][{ThreadUniqueNumber.GetNumberValues()[i]}]");
+                            Debug.WriteLine($"[{i}][{j}][{ThreadLocalInformation.GetUniqueIDValues()[i]}]");
                         }
                     }
                 }
@@ -95,25 +114,25 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
             {
                 for (int j = ConstValue.StartIndex; j < mLoopTimes; ++j)
                 {
-                    Debug.WriteLine($"[{DateTime.UtcNow.Ticks}][{ThreadUniqueNumber.GetCreationTime().Ticks}][{ThreadUniqueNumber.GetNumber()}][{i}][{j}][{PortableThreadSafeRandom.GetInstance().Next()}]");
+                    Debug.WriteLine($"[{TimeHelper.GetTimeNowByPreprocessor().Ticks}][{ThreadLocalInformation.GetCreationTime().Ticks}][{ThreadLocalInformation.GetUniqueID()}][{i}][{j}][{PortableThreadSafeRandom.GetInstance().Next()}]");
                 }
             });
 
             mActual1 = PortableThreadSafeRandom.CheckSeedValuesNoDuplicate();
 
-            Debug.WriteLine($"[{ThreadUniqueNumber.GetCreationTimeValues().Count}][{string.Join(", ", ThreadUniqueNumber.GetCreationTimeValues())}]");
-            Debug.WriteLine($"[{ThreadUniqueNumber.GetGuidValues().Count}][{string.Join(", ", ThreadUniqueNumber.GetGuidValues())}]");
-            Debug.WriteLine($"[{ThreadUniqueNumber.GetNumberValues().Count}][{string.Join(", ", ThreadUniqueNumber.GetNumberValues())}]");
+            Debug.WriteLine($"[{ThreadLocalInformation.GetCreationTimeValues().Count}][{string.Join(", ", ThreadLocalInformation.GetCreationTimeValues())}]");
+            Debug.WriteLine($"[{ThreadLocalInformation.GetGuidValues().Count}][{string.Join(", ", ThreadLocalInformation.GetGuidValues())}]");
+            Debug.WriteLine($"[{ThreadLocalInformation.GetUniqueIDValues().Count}][{string.Join(", ", ThreadLocalInformation.GetUniqueIDValues())}]");
 
             if (!mActual1)
             {
-                for (int i = ConstValue.StartIndex; i < (ThreadUniqueNumber.GetNumberValues().Count - ConstNumberValue.One); ++i)
+                for (int i = ConstValue.StartIndex; i < (ThreadLocalInformation.GetUniqueIDValues().Count - ConstNumberValue.One); ++i)
                 {
-                    for (int j = (i + ConstNumberValue.One); j < ThreadUniqueNumber.GetNumberValues().Count; ++j)
+                    for (int j = (i + ConstNumberValue.One); j < ThreadLocalInformation.GetUniqueIDValues().Count; ++j)
                     {
                         if (j == i)
                         {
-                            Debug.WriteLine($"[{i}][{j}][{ThreadUniqueNumber.GetNumberValues()[i]}]");
+                            Debug.WriteLine($"[{i}][{j}][{ThreadLocalInformation.GetUniqueIDValues()[i]}]");
                         }
                     }
                 }

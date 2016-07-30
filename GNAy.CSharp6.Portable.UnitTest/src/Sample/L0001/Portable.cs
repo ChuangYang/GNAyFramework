@@ -13,7 +13,11 @@ using System.Collections.Generic;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.UnitTest.Sample.L0001_Portable
+#else
 namespace GNAy.CSharp6.Portable.UnitTest.Sample
+#endif
 {
     /// <summary>
     /// 
@@ -21,13 +25,21 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
     [TestClass]
     public class Portable
     {
+#if Development
+        private static CSharp6.Portable.Tests.Sample.L0000_UnitTest.UnitTest _unitTest;
+#else
         private static CSharp6.Portable.Tests.Sample.UnitTest _unitTest;
+#endif
 
         static Portable()
         {
+#if Development
+            _unitTest = new CSharp6.Portable.Tests.Sample.L0000_UnitTest.UnitTest();
+#else
             _unitTest = new CSharp6.Portable.Tests.Sample.UnitTest();
+#endif
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -16,31 +16,33 @@ using System.Threading.Tasks;
 #region Alias.
 #endregion
 
+#if Development
+namespace GNAy.CSharp6.Portable.Utility.L0000_CommonEvent
+#else
 namespace GNAy.CSharp6.Portable.Utility
+#endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public enum EFunctionStatus
+    public class CommonEvent
     {
         /// <summary>
         /// 
         /// </summary>
-        Unknown,
+        /// <returns></returns>
+        public static bool ReturnTrue()
+        {
+            return true;
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        IsRunning,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        IsFinished,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        HasException,
+        /// <returns></returns>
+        public static bool ReturnFalse()
+        {
+            return false;
+        }
     }
 }

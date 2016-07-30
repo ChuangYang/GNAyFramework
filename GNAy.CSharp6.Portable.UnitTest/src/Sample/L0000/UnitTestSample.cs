@@ -20,7 +20,12 @@ using System.Threading;
 #region Alias.
 #endregion
 
+#if Development
+
+namespace GNAy.CSharp6.Portable.UnitTest.Sample.L0000_UnitTestSample
+#else
 namespace GNAy.CSharp6.Portable.UnitTest.Sample
+#endif
 {
     /// <summary>
     /// All the test methods in this class must be stand along.
