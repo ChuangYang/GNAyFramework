@@ -31,14 +31,14 @@ namespace GNAy.CSharp6.Portable.Const
     public class ConstString
     {
         /// <summary>
-        /// ' '
-        /// </summary>
-        public const char CharBlank = ' ';
-
-        /// <summary>
         /// ""
         /// </summary>
         public const string Empty = "";
+
+        /// <summary>
+        /// ' '
+        /// </summary>
+        public const char CharBlank = ' ';
 
         /// <summary>
         /// " "
@@ -46,9 +46,44 @@ namespace GNAy.CSharp6.Portable.Const
         public const string Blank = " ";
 
         /// <summary>
+        /// "\t"
+        /// </summary>
+        public const string HorizontalTab = "\t";
+
+        /// <summary>
+        /// "\r"
+        /// </summary>
+        public const string CarriageReturn = "\r";
+
+        /// <summary>
+        /// "\n"
+        /// </summary>
+        public const string LineFeed = "\n";
+
+        /// <summary>
         /// "\r\n"
         /// </summary>
         public const string NewLine = "\r\n";
+
+        /// <summary>
+        /// '('
+        /// </summary>
+        public const char CharOpenParenthesis = '(';
+
+        /// <summary>
+        /// "("
+        /// </summary>
+        public const string OpenParenthesis = "(";
+
+        /// <summary>
+        /// ')'
+        /// </summary>
+        public const char CharCloseParenthesis = ')';
+
+        /// <summary>
+        /// ")"
+        /// </summary>
+        public const string CloseParenthesis = ")";
 
         /// <summary>
         /// "{"

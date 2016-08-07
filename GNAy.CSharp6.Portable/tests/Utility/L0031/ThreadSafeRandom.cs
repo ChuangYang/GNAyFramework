@@ -33,7 +33,7 @@ using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Utility.ThreadSafeRandom;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Tests.Utility.L0041_ThreadSafeRandom
+namespace GNAy.CSharp6.Portable.Tests.Utility.L0031_ThreadSafeRandom
 #else
 namespace GNAy.CSharp6.Portable.Tests.Utility
 #endif

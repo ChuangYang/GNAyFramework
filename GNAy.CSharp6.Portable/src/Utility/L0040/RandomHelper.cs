@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
 using GNAy.CSharp6.Portable.Utility.L0030_ThreadSafeRandom;
-using GNAy.CSharp6.Portable.Utility.L0040_ThreadLocalFunctionObserver;
 #else
 using GNAy.CSharp6.Portable.Const;
 #endif
@@ -25,7 +24,7 @@ using GNAy.CSharp6.Portable.Const;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0050_RandomHelper
+namespace GNAy.CSharp6.Portable.Utility.L0040_RandomHelper
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif
@@ -98,18 +97,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <returns></returns>
         public static T[] zShuffleItems<T>(this T[] ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes)
         {
-            try
-            {
-                return (T[])zShuffleItems((IList<T>)ioSource, ioRandom, iShufflingTimes);
-            }
-            catch (Exception mException)
-            {
-                mException.zSaveFuncInfo(mException.StackTrace);
-
-                return ioSource;
-            }
-            finally
-            { }
+            return (T[])zShuffleItems((IList<T>)ioSource, ioRandom, iShufflingTimes);
         }
 
         /// <summary>

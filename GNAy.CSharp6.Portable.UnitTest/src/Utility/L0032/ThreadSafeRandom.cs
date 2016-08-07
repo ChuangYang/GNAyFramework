@@ -14,7 +14,7 @@ using System.Collections.Generic;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.UnitTest.Utility.L0042_ThreadSafeRandom
+namespace GNAy.CSharp6.Portable.UnitTest.Utility.L0032_ThreadSafeRandom
 #else
 namespace GNAy.CSharp6.Portable.UnitTest.Utility
 #endif
@@ -26,7 +26,7 @@ namespace GNAy.CSharp6.Portable.UnitTest.Utility
     public class ThreadSafeRandom
     {
 #if Development
-        private static CSharp6.Portable.Tests.Utility.L0041_ThreadSafeRandom.ThreadSafeRandom _threadSafeRandom;
+        private static CSharp6.Portable.Tests.Utility.L0031_ThreadSafeRandom.ThreadSafeRandom _threadSafeRandom;
 #else
         private static CSharp6.Portable.Tests.Utility.ThreadSafeRandom _threadSafeRandom;
 #endif
@@ -34,7 +34,7 @@ namespace GNAy.CSharp6.Portable.UnitTest.Utility
         static ThreadSafeRandom()
         {
 #if Development
-            _threadSafeRandom = new CSharp6.Portable.Tests.Utility.L0041_ThreadSafeRandom.ThreadSafeRandom();
+            _threadSafeRandom = new CSharp6.Portable.Tests.Utility.L0031_ThreadSafeRandom.ThreadSafeRandom();
 #else
             _threadSafeRandom = new CSharp6.Portable.Tests.Utility.ThreadSafeRandom();
 #endif

@@ -43,6 +43,11 @@ namespace GNAy.CSharp6.Portable.Const
         public const string Two = "2";
 
         /// <summary>
+        /// 3
+        /// </summary>
+        public const string Three = "3";
+
+        /// <summary>
         /// 5
         /// </summary>
         public const string Five = "5";
