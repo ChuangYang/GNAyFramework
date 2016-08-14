@@ -66,6 +66,16 @@ namespace GNAy.CSharp6.Portable.Const
         public const string NewLine = "\r\n";
 
         /// <summary>
+        /// '.'
+        /// </summary>
+        public const char CharPoint = '.';
+
+        /// <summary>
+        /// '-'
+        /// </summary>
+        public const char CharNegativeNumber = '-';
+
+        /// <summary>
         /// '('
         /// </summary>
         public const char CharOpenParenthesis = '(';

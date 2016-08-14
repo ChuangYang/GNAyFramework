@@ -739,7 +739,7 @@ E1E2E4");
             mActual7 = ((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5));
             mActual8 = ((mActual5 < mActual1) && (mActual3 < mActual1));
             mActual9 = ((mActual6 < mActual4) && (mActual6 < mActual2));
-
+            
             Debug.WriteLine("((mActual2 < mActual1) && (mActual4 < mActual3) && (mActual6 < mActual5))");
             Debug.WriteLine("((mActual5 < mActual1) && (mActual3 < mActual1))");
             Debug.WriteLine("((mActual6 < mActual4) && (mActual6 < mActual2))");
