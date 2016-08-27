@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 #region GNAy namespace.
 #if Development
-using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
+using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 #else
 using GNAy.CSharp6.Portable.Utility;
 #endif
@@ -22,7 +22,7 @@ using GNAy.CSharp6.Portable.Utility;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Information.L0010_LibraryInformation
+namespace GNAy.CSharp6.Portable.Information.L0020_LibraryInformation
 #else
 namespace GNAy.CSharp6.Portable.Information
 #endif
@@ -30,7 +30,7 @@ namespace GNAy.CSharp6.Portable.Information
     /// <summary>
     /// 
     /// </summary>
-    public static class LibraryInformation
+    public class LibraryInformation
     {
         /// <summary>
         /// 
@@ -53,5 +53,11 @@ namespace GNAy.CSharp6.Portable.Information
             Guid = Guid.NewGuid();
             UniqueID = (CreationTime.GetHashCode() ^ Guid.GetHashCode());
         }
+
+        /// <summary>
+        /// Initialize the static instance.
+        /// </summary>
+        public static void Initialize()
+        { }
     }
 }

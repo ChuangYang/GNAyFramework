@@ -14,9 +14,9 @@ using System.Collections.Generic;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.UnitTest.Utility.L0042_ThreadLocalMemberObserver
+namespace GNAy.CSharp6.Portable.UnitTest.Threading.L0052_ThreadLocalMemberObserver
 #else
-namespace GNAy.CSharp6.Portable.UnitTest.Utility
+namespace GNAy.CSharp6.Portable.UnitTest.Threading
 #endif
 {
     /// <summary>
@@ -26,32 +26,32 @@ namespace GNAy.CSharp6.Portable.UnitTest.Utility
     public class ThreadLocalMemberObserver
     {
 #if Development
-        private static CSharp6.Portable.Tests.Utility.L0041_ThreadLocalMemberObserver.ThreadLocalMemberObserver _threadLocalMemberObserver;
+        private static CSharp6.Portable.Tests.Threading.L0051_ThreadLocalMemberObserver.ThreadLocalMemberObserver _threadLocalMemberObserver;
 #else
-        private static CSharp6.Portable.Tests.Utility.ThreadLocalMemberObserver _threadLocalMemberObserver;
+        private static CSharp6.Portable.Tests.Threading.ThreadLocalMemberObserver _threadLocalMemberObserver;
 #endif
 
         static ThreadLocalMemberObserver()
         {
 #if Development
-            _threadLocalMemberObserver = new CSharp6.Portable.Tests.Utility.L0041_ThreadLocalMemberObserver.ThreadLocalMemberObserver();
+            _threadLocalMemberObserver = new CSharp6.Portable.Tests.Threading.L0051_ThreadLocalMemberObserver.ThreadLocalMemberObserver();
 #else
-            _threadLocalMemberObserver = new CSharp6.Portable.Tests.Utility.ThreadLocalMemberObserver();
+            _threadLocalMemberObserver = new CSharp6.Portable.Tests.Threading.ThreadLocalMemberObserver();
 #endif
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         [TestMethod]
-        public void SaveMemberInfo()
+        public void SaevMemebrInfo()
         {
             _threadLocalMemberObserver.SaveMemberInfo();
         }
         //[636061522767354369][636061522767344342][10027]
         //[IsFinished][IsRunning]
         //[-42819511][1870254681]
-        //[SaveMemberInfo][C:\GNAy Framework\GNAy.CSharp6.Portable\tests\Utility\ThreadLocalMemberObserver.cs]
+        //[SaveMemberInfo][C:\GNAy Framework\GNAy.CSharp6.Portable\tests\Threading\ThreadLocalMemberObserver.cs]
         //[73][72][1]
         //[][]
     }

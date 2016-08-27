@@ -13,10 +13,11 @@ using System.Threading;
 
 #region GNAy namespace.
 #if Development
-using GNAy.CSharp6.Portable.Information.L0010_LibraryInformation;
-using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
+using GNAy.CSharp6.Portable.Information.L0020_LibraryInformation;
+using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 #else
 using GNAy.CSharp6.Portable.Information;
+using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion
 
@@ -24,15 +25,15 @@ using GNAy.CSharp6.Portable.Information;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation
+namespace GNAy.CSharp6.Portable.Threading.L0030_ThreadLocalInformation
 #else
-namespace GNAy.CSharp6.Portable.Utility
+namespace GNAy.CSharp6.Portable.Threading
 #endif
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class ThreadLocalInformation
+    public class ThreadLocalInformation
     {
         private static readonly ThreadLocal<DateTime> _creationTime;
         private static readonly ThreadLocal<Guid> _guid;

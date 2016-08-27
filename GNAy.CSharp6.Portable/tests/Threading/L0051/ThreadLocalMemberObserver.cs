@@ -15,8 +15,8 @@ using System.Diagnostics.Contracts;
 #region GNAy namespace.
 #if Development
 using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
-using GNAy.CSharp6.Portable.Utility.L0030_CallerService;
-using GNAy.CSharp6.Portable.Utility.L0030_MemberInformation;
+using GNAy.CSharp6.Portable.Utility.L0020_CallerService;
+using GNAy.CSharp6.Portable.Utility.L0040_MemberInformation;
 #else
 using GNAy.CSharp6.Portable.Utility;
 #endif
@@ -24,20 +24,20 @@ using GNAy.CSharp6.Portable.Utility;
 
 #region Alias.
 #if Development
-using PortableThreadLocalMemberObserver = GNAy.CSharp6.Portable.Utility.L0040_ThreadLocalMemberObserver.ThreadLocalMemberObserver;
+using PortableThreadLocalMemberObserver = GNAy.CSharp6.Portable.Threading.L0050_ThreadLocalMemberObserver.ThreadLocalMemberObserver;
 #else
-using PortableThreadLocalMemberObserver = GNAy.CSharp6.Portable.Utility.ThreadLocalMemberObserver;
+using PortableThreadLocalMemberObserver = GNAy.CSharp6.Portable.Threading.ThreadLocalMemberObserver;
 #endif
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Tests.Utility.L0041_ThreadLocalMemberObserver
+namespace GNAy.CSharp6.Portable.Tests.Threading.L0051_ThreadLocalMemberObserver
 #else
-namespace GNAy.CSharp6.Portable.Tests.Utility
+namespace GNAy.CSharp6.Portable.Tests.Threading
 #endif
 {
     /// <summary>
-    /// <para>Don't use GNAy.CSharp6.Portable.Tests.Utility.</para>
+    /// <para>Don't use GNAy.CSharp6.Portable.Tests.Threading.</para>
     /// </summary>
     public class ThreadLocalMemberObserver
     {
@@ -72,7 +72,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
             mArgument1 = PortableThreadLocalMemberObserver.SaveMemberInfo(EMemberStatus.IsRunning);
             mArgument2 = PortableThreadLocalMemberObserver.SaveMemberInfo(EMemberStatus.IsFinished);
 
-            mActual1 = (mArgument2.CreationTime > mArgument1.CreationTime);
+            mActual1 = (mArgument2.CreationTime >= mArgument1.CreationTime);
             mActual2 = ((mArgument2.Status == EMemberStatus.IsFinished) && (mArgument1.Status == EMemberStatus.IsRunning));
             mActual3 = (mArgument2.UniqueThreadID == mArgument1.UniqueThreadID);
             mActual4 = (mArgument2.UniqueMemberID == mArgument1.UniqueMemberID);

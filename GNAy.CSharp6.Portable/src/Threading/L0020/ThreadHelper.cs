@@ -14,7 +14,9 @@ using System.Threading;
 #region GNAy namespace.
 #if Development
 using GNAy.CSharp6.Portable.Utility.L0000_CommonEvent;
-using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
+using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
+#else
+using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion
 
@@ -22,9 +24,9 @@ using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0010_ThreadHelper
+namespace GNAy.CSharp6.Portable.Threading.L0020_ThreadHelper
 #else
-namespace GNAy.CSharp6.Portable.Utility
+namespace GNAy.CSharp6.Portable.Threading
 #endif
 {
     /// <summary>

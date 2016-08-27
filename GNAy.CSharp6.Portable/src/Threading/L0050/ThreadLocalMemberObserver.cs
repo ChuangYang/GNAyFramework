@@ -19,9 +19,10 @@ using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
 using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
 using GNAy.CSharp6.Portable.Utility.L0000_ObjectHelper;
-using GNAy.CSharp6.Portable.Utility.L0030_MemberInformation;
+using GNAy.CSharp6.Portable.Utility.L0040_MemberInformation;
 #else
 using GNAy.CSharp6.Portable.Const;
+using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion
 
@@ -29,9 +30,9 @@ using GNAy.CSharp6.Portable.Const;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0040_ThreadLocalMemberObserver
+namespace GNAy.CSharp6.Portable.Threading.L0050_ThreadLocalMemberObserver
 #else
-namespace GNAy.CSharp6.Portable.Utility
+namespace GNAy.CSharp6.Portable.Threading
 #endif
 {
     /// <summary>
@@ -74,7 +75,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <returns></returns>
         public static EMemberStatus GetLastMemberStatus()
         {
-            return (GetLastMemberInfo().zIsNull() ? EMemberStatus.Unknown : GetLastMemberInfo().Status);
+            return (GetLastMemberInfo().zzIsNull() ? EMemberStatus.Unknown : GetLastMemberInfo().Status);
         }
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iCallerFilePath"></param>
         /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static MemberInformation zSaveMemberInfo(this Exception ioSource, string iExceptionStackTrace, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static MemberInformation zzSaveMemberInfo(this Exception ioSource, string iExceptionStackTrace, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
             return SaveMemberInfo(ioSource, iExceptionStackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
         }

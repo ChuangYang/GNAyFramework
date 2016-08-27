@@ -1,4 +1,4 @@
-1. Programmer's Job Every Day
+Ôªø1. Programmer's Job Every Day
 
 1.1 After Working
 
@@ -23,8 +23,8 @@ Put bugs in schedule and set them to important level.
 As far as possible without abbreviation (unless it is a popular practice).
 Coding style should be separated from the programing language and compiler. Regardless of any language and compiler, the style must make the code be readable and maintainable easily.
 Coding style should be separated from the programmer. The code should be easier to handover and maintain.
-The code and compiler should be separated. The same function can be used by the different compilers to compile successfully. The strong dependency components should be packed by using °ßdefine°®.
-Don°¶t trust compiler, because compiler must have bugs.
+The code and compiler should be separated. The same function can be used by the different compilers to compile successfully. The strong dependency components should be packed by using ‚Äúdefine‚Äù.
+Don‚Äôt trust compiler, because compiler must have bugs.
 Coding principle should be followed the principles of Finite-State Machine and Defensive Programming.
 The algorithm and programing language must be separated. The same algorithm can be written by the different languages.
 Even some programming languages are not case-sensitive, but the coding style should be case-sensitive.
@@ -37,20 +37,20 @@ E:   Enumeration
 
 T:   Type or Generic
 
-z:   Extension Method
+zz:  Extension Method
 
-m:   The parameter declared in the method (exception: i, j, k°K).
+m:   The parameter declared in the method (exception: i, j, k‚Ä¶).
 i:   The input parameter of the method.
 o:   The output parameter of the method.
 io:  The parameter that has the input and output abilities, so the name of reference type should be started with "io".
 
-The names of the parameters in the predicate of for-loop should be i, j, k°K.
-The parameters named i, j, k°K should only be used in the predicate of for-loop.
+The names of the parameters in the predicate of for-loop should be i, j, k‚Ä¶.
+The parameters named i, j, k‚Ä¶ should only be used in the predicate of for-loop.
 
 
 1.3 Design Principle
 
-The different versions should be packed and managed in the same project by using °ßdefine°®.
+The different versions should be packed and managed in the same project by using ‚Äúdefine‚Äù.
 Because warning means the potential bug, we should do as far as possible to reduce the warnings.
 There is no magic number or magic string.
 
@@ -69,11 +69,11 @@ When the need to use structure, as far as possible, using the class to replace s
 The common functions should be static.
 The reference data of the static function should be the input parameters.
 
-The names of the parameters in the predicate of for-loop should be i, j, k°K.
-The parameters named i, j, k°K should only be used in the predicate of for-loop.
+The names of the parameters in the predicate of for-loop should be i, j, k‚Ä¶.
+The parameters named i, j, k‚Ä¶ should only be used in the predicate of for-loop.
 
 Coding principle should be followed the principles of Finite-State Machine and Defensive Programming.
-Don°¶t forget the comment °ß//TODO°® when the time is not enough to design or write the good code.
+Don‚Äôt forget the comment ‚Äú//TODO‚Äù when the time is not enough to design or write the good code.
 
 Implement the patterns of Guarded Suspension Pattern, Thread Pool, and Observer Pattern in the kernel of multi-thread programming first, than using these patterns to design and implement the business logic layer and application layer.
 
@@ -87,5 +87,4 @@ The constructor of class or structure should be implemented with Factory Method 
 Use pool, container, or bucket to packet and manage the same kind of data.
 Use Observer Pattern to handle the same kind of events.
 Implement the patterns of Guarded Suspension Pattern, Thread Pool, and Observer Pattern in the kernel of multi-thread programming first, than using these patterns to design and implement the business logic layer and application layer.
-
 

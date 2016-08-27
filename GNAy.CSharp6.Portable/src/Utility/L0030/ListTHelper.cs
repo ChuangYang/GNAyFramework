@@ -11,13 +11,19 @@ using System.Threading.Tasks;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
+using GNAy.CSharp6.Portable.Utility.L0020_CollectionTHelper;
+#else
+using GNAy.CSharp6.Portable.Const;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0000_ObjectHelper
+namespace GNAy.CSharp6.Portable.Utility.L0030_ListTHelper
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif
@@ -25,30 +31,28 @@ namespace GNAy.CSharp6.Portable.Utility
     /// <summary>
     /// 
     /// </summary>
-    public static class ObjectHelper
+    public static class ListTHelper
     {
         /// <summary>
-        /// <para>Equals may be overridden.</para>
-        /// <para>Structure may be nullable or be boxed like an object class.</para>
+        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static bool zzIsNull<T>(this T ioSource)
+        public static T zzGetFirstItem<T>(this List<T> ioSource)
         {
-            return !(ioSource is T);
+            return ioSource[ConstValue.StartIndex];
         }
 
         /// <summary>
-        /// <para>Equals may be overridden.</para>
-        /// <para>Structure may be nullable or be boxed like an object class.</para>
+        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static bool zzIsNotNull<T>(this T ioSource)
+        public static T zzGetLastItem<T>(this List<T> ioSource)
         {
-            return (ioSource is T);
+            return ioSource[ioSource.zzGetLastIndex()];
         }
     }
 }

@@ -16,30 +16,32 @@ using System.Diagnostics.Contracts;
 #if Development
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
-using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
-using GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation;
+using GNAy.CSharp6.Portable.Threading.L0030_ThreadLocalInformation;
+using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
+using GNAy.CSharp6.Portable.Utility.L0020_CollectionTHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
+using GNAy.CSharp6.Portable.Threading;
 using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion
 
 #region Alias.
 #if Development
-using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Utility.L0030_ThreadSafeRandom.ThreadSafeRandom;
+using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Threading.L0040_ThreadSafeRandom.ThreadSafeRandom;
 #else
-using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Utility.ThreadSafeRandom;
+using PortableThreadSafeRandom = GNAy.CSharp6.Portable.Threading.ThreadSafeRandom;
 #endif
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Tests.Utility.L0031_ThreadSafeRandom
+namespace GNAy.CSharp6.Portable.Tests.Threading.L0041_ThreadSafeRandom
 #else
-namespace GNAy.CSharp6.Portable.Tests.Utility
+namespace GNAy.CSharp6.Portable.Tests.Threading
 #endif
 {
     /// <summary>
-    /// <para>Don't use GNAy.CSharp6.Portable.Tests.Utility.</para>
+    /// <para>Don't use GNAy.CSharp6.Portable.Tests.Threading.</para>
     /// </summary>
     public class ThreadSafeRandom
     {
@@ -80,7 +82,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             if (!mActual1)
             {
-                for (int i = ConstValue.StartIndex; i < (ThreadLocalInformation.GetUniqueIDValues().Count - ConstNumberValue.One); ++i)
+                for (int i = ConstValue.StartIndex; i < ThreadLocalInformation.GetUniqueIDValues().zzGetLastIndex(); ++i)
                 {
                     for (int j = (i + ConstNumberValue.One); j < ThreadLocalInformation.GetUniqueIDValues().Count; ++j)
                     {
@@ -126,7 +128,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             if (!mActual1)
             {
-                for (int i = ConstValue.StartIndex; i < (ThreadLocalInformation.GetUniqueIDValues().Count - ConstNumberValue.One); ++i)
+                for (int i = ConstValue.StartIndex; i < ThreadLocalInformation.GetUniqueIDValues().zzGetLastIndex(); ++i)
                 {
                     for (int j = (i + ConstNumberValue.One); j < ThreadLocalInformation.GetUniqueIDValues().Count; ++j)
                     {

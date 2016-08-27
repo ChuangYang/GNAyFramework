@@ -14,9 +14,10 @@ using System.Threading.Tasks;
 #if Development
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
-using GNAy.CSharp6.Portable.Utility.L0030_ThreadSafeRandom;
+using GNAy.CSharp6.Portable.Threading.L0040_ThreadSafeRandom;
 #else
 using GNAy.CSharp6.Portable.Const;
+using GNAy.CSharp6.Portable.Threading;
 #endif
 #endregion
 
@@ -24,7 +25,7 @@ using GNAy.CSharp6.Portable.Const;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0040_RandomHelper
+namespace GNAy.CSharp6.Portable.Utility.L0050_RandomHelper
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif
@@ -47,7 +48,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioRandom"></param>
         /// <param name="iShufflingTimes"></param>
         /// <returns></returns>
-        public static IList<T> zShuffleItems<T>(this IList<T> ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes)
+        public static IList<T> zzShuffleItems<T>(this IList<T> ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes)
         {
             int mCount = ioSource.Count;
 
@@ -72,7 +73,7 @@ namespace GNAy.CSharp6.Portable.Utility
                 ioSource[mRandomNumber] = mItem;
             }
 
-            return ((--iShufflingTimes > ConstNumberValue.Zero) ? zShuffleItems(ioSource, ioRandom, iShufflingTimes) : ioSource);
+            return ((--iShufflingTimes > ConstNumberValue.Zero) ? zzShuffleItems(ioSource, ioRandom, iShufflingTimes) : ioSource);
         }
 
         /// <summary>
@@ -82,9 +83,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="iShufflingTimes"></param>
         /// <returns></returns>
-        public static IList<T> zShuffleItems<T>(this IList<T> ioSource, int iShufflingTimes = DefaultShufflingTimes)
+        public static IList<T> zzShuffleItems<T>(this IList<T> ioSource, int iShufflingTimes = DefaultShufflingTimes)
         {
-            return zShuffleItems(ioSource, ThreadSafeRandom.GetInstance(), iShufflingTimes);
+            return zzShuffleItems(ioSource, ThreadSafeRandom.GetInstance(), iShufflingTimes);
         }
 
         /// <summary>
@@ -95,9 +96,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioRandom"></param>
         /// <param name="iShufflingTimes"></param>
         /// <returns></returns>
-        public static T[] zShuffleItems<T>(this T[] ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes)
+        public static T[] zzShuffleItems<T>(this T[] ioSource, Random ioRandom, int iShufflingTimes = DefaultShufflingTimes)
         {
-            return (T[])zShuffleItems((IList<T>)ioSource, ioRandom, iShufflingTimes);
+            return (T[])zzShuffleItems((IList<T>)ioSource, ioRandom, iShufflingTimes);
         }
 
         /// <summary>
@@ -107,9 +108,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="iShufflingTimes"></param>
         /// <returns></returns>
-        public static T[] zShuffleItems<T>(this T[] ioSource, int iShufflingTimes = DefaultShufflingTimes)
+        public static T[] zzShuffleItems<T>(this T[] ioSource, int iShufflingTimes = DefaultShufflingTimes)
         {
-            return zShuffleItems(ioSource, ThreadSafeRandom.GetInstance(), iShufflingTimes);
+            return zzShuffleItems(ioSource, ThreadSafeRandom.GetInstance(), iShufflingTimes);
         }
 
         /// <summary>
@@ -118,7 +119,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="iCount"></param>
         /// <returns></returns>
-        public static int[] zDistinctInts(this Random ioSource, ushort iCount)
+        public static int[] zzDistinctInts(this Random ioSource, ushort iCount)
         {
             int[] mResult = new int[iCount];
 
@@ -148,7 +149,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iMaxValue"></param>
         /// <param name="iCount"></param>
         /// <returns></returns>
-        public static int[] zDistinctInts(this Random ioSource, int iMaxValue, ushort iCount)
+        public static int[] zzDistinctInts(this Random ioSource, int iMaxValue, ushort iCount)
         {
             int[] mResult = new int[iCount];
 
@@ -179,7 +180,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iMaxValue"></param>
         /// <param name="iCount"></param>
         /// <returns></returns>
-        public static int[] zDistinctInts(this Random ioSource, int iMinValue, int iMaxValue, ushort iCount)
+        public static int[] zzDistinctInts(this Random ioSource, int iMinValue, int iMaxValue, ushort iCount)
         {
             int[] mResult = new int[iCount];
 
@@ -208,7 +209,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="iCount"></param>
         /// <returns></returns>
-        public static byte[] zDistinctBytes(this Random ioSource, ushort iCount)
+        public static byte[] zzDistinctBytes(this Random ioSource, ushort iCount)
         {
             byte[] mResult = new byte[iCount];
 
@@ -237,7 +238,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="iCount"></param>
         /// <returns></returns>
-        public static double[] zDistinctDoubles(this Random ioSource, ushort iCount)
+        public static double[] zzDistinctDoubles(this Random ioSource, ushort iCount)
         {
             double[] mResult = new double[iCount];
 

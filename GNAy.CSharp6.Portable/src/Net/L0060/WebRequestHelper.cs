@@ -16,9 +16,11 @@ using System.Net;
 #if Development
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
-using GNAy.CSharp6.Portable.Utility.L0040_ThreadLocalMemberObserver;
+using GNAy.CSharp6.Portable.Threading.L0050_ThreadLocalMemberObserver;
+using GNAy.CSharp6.Portable.Utility.L0020_CollectionTHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
+using GNAy.CSharp6.Portable.Threading;
 using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion
@@ -27,9 +29,9 @@ using GNAy.CSharp6.Portable.Utility;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0050_WebRequestHelper
+namespace GNAy.CSharp6.Portable.Net.L0060_WebRequestHelper
 #else
-namespace GNAy.CSharp6.Portable.Utility
+namespace GNAy.CSharp6.Portable.Net
 #endif
 {
     /// <summary>
@@ -53,7 +55,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static async Task<byte[]> zGetResponseBytes(this WebRequest ioSource)
+        public static async Task<byte[]> zzGetResponseBytes(this WebRequest ioSource)
         {
             using (WebResponse mWebResponse = await ioSource.GetResponseAsync())
             {
@@ -74,22 +76,22 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSourceAndBackups"></param>
         /// <returns></returns>
-        public static async Task<byte[]> zGetResponseBytes(this IList<WebRequest> ioSourceAndBackups)
+        public static async Task<byte[]> zzGetResponseBytes(this IList<WebRequest> ioSourceAndBackups)
         {
             for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)
             {
                 try
                 {
-                    return await zGetResponseBytes(ioSourceAndBackups[i]);
+                    return await zzGetResponseBytes(ioSourceAndBackups[i]);
                 }
                 catch (Exception mException)
                 {
-                    if (i == (ioSourceAndBackups.Count - ConstNumberValue.One))
+                    if (i == ioSourceAndBackups.zzGetLastIndex())
                     {
                         throw mException;
                     }
 
-                    mException.zSaveMemberInfo(mException.StackTrace);
+                    mException.zzSaveMemberInfo(mException.StackTrace);
                 }
                 finally
                 { }
@@ -104,7 +106,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSource"></param>
         /// <param name="ioEncoding"></param>
         /// <returns></returns>
-        public static async Task<string> zGetResponseString(this WebRequest ioSource, Encoding ioEncoding)
+        public static async Task<string> zzGetResponseString(this WebRequest ioSource, Encoding ioEncoding)
         {
             using (WebResponse mWebResponse = await ioSource.GetResponseAsync())
             {
@@ -124,22 +126,22 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="ioSourceAndBackups"></param>
         /// <param name="ioEncoding"></param>
         /// <returns></returns>
-        public static async Task<string> zGetResponseString(this IList<WebRequest> ioSourceAndBackups, Encoding ioEncoding)
+        public static async Task<string> zzGetResponseString(this IList<WebRequest> ioSourceAndBackups, Encoding ioEncoding)
         {
             for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)
             {
                 try
                 {
-                    return await zGetResponseString(ioSourceAndBackups[i], ioEncoding);
+                    return await zzGetResponseString(ioSourceAndBackups[i], ioEncoding);
                 }
                 catch (Exception mException)
                 {
-                    if (i == (ioSourceAndBackups.Count - ConstNumberValue.One))
+                    if (i == ioSourceAndBackups.zzGetLastIndex())
                     {
                         throw mException;
                     }
 
-                    mException.zSaveMemberInfo(mException.StackTrace);
+                    mException.zzSaveMemberInfo(mException.StackTrace);
                 }
                 finally
                 { }

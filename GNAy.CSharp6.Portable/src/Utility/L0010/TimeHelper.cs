@@ -12,13 +12,18 @@ using System.Threading;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+#else
+using GNAy.CSharp6.Portable.Const;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0000_TimeHelper
+namespace GNAy.CSharp6.Portable.Utility.L0010_TimeHelper
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif
@@ -75,7 +80,7 @@ namespace GNAy.CSharp6.Portable.Utility
             TimeMax = new DateTime(DateTime.MaxValue.Ticks, KindByPreprocessor);
             TimeDefault = TimeMin;
 
-            MinTimeUnit = new TimeSpan(1);
+            MinTimeUnit = new TimeSpan(ConstNumberValue.One);
             InfiniteTimeSpan = Timeout.InfiniteTimeSpan;
         }
 
@@ -84,7 +89,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static TimeSpan zGetUtcElapsedTime(this DateTime ioSource)
+        public static TimeSpan zzGetUtcElapsedTime(this DateTime ioSource)
         {
             return (DateTime.UtcNow - ioSource);
         }
@@ -94,7 +99,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static TimeSpan zGetLocalElapsedTime(this DateTime ioSource)
+        public static TimeSpan zzGetLocalElapsedTime(this DateTime ioSource)
         {
             return (DateTime.Now - ioSource);
         }
@@ -104,15 +109,15 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static TimeSpan zGetElapsedTimeByKind(this DateTime ioSource)
+        public static TimeSpan zzGetElapsedTimeByKind(this DateTime ioSource)
         {
             if (ioSource.Kind == DateTimeKind.Utc)
             {
-                return zGetUtcElapsedTime(ioSource);
+                return zzGetUtcElapsedTime(ioSource);
             }
             else if (ioSource.Kind == DateTimeKind.Local)
             {
-                return zGetLocalElapsedTime(ioSource);
+                return zzGetLocalElapsedTime(ioSource);
             }
 
             throw new ArgumentException("ioSource.Kind == DateTimeKind.Unspecified");
@@ -133,7 +138,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static TimeSpan zGetElapsedTimeByPreprocessor(this DateTime ioSource)
+        public static TimeSpan zzGetElapsedTimeByPreprocessor(this DateTime ioSource)
         {
             return (DateTime.Now - ioSource);
         }
@@ -152,7 +157,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// </summary>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static TimeSpan zGetElapsedTimeByPreprocessor(this DateTime ioSource)
+        public static TimeSpan zzGetElapsedTimeByPreprocessor(this DateTime ioSource)
         {
             return (DateTime.UtcNow - ioSource);
         }
@@ -164,7 +169,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iSource"></param>
         /// <param name="iFormat"></param>
         /// <returns></returns>
-        public static string zToSQLFormat(this DateTime iSource, string iFormat = DefaultSQLTimeFormat)
+        public static string zzToSQLFormat(this DateTime iSource, string iFormat = DefaultSQLTimeFormat)
         {
             return iSource.ToString(iFormat);
         }

@@ -24,7 +24,7 @@ using GNAy.CSharp6.Portable.Const;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0030_CallerService
+namespace GNAy.CSharp6.Portable.Utility.L0020_CallerService
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif
@@ -32,7 +32,7 @@ namespace GNAy.CSharp6.Portable.Utility
     /// <summary>
     /// 
     /// </summary>
-    public static class CallerService
+    public class CallerService
     {
         /// <summary>
         /// 

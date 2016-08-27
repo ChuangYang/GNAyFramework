@@ -15,11 +15,12 @@ using System.Runtime.CompilerServices;
 #if Development
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
+using GNAy.CSharp6.Portable.Threading.L0030_ThreadLocalInformation;
 using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
-using GNAy.CSharp6.Portable.Utility.L0000_TimeHelper;
-using GNAy.CSharp6.Portable.Utility.L0020_ThreadLocalInformation;
+using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
+using GNAy.CSharp6.Portable.Threading;
 #endif
 #endregion
 
@@ -27,7 +28,7 @@ using GNAy.CSharp6.Portable.Const;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0030_MemberInformation
+namespace GNAy.CSharp6.Portable.Utility.L0040_MemberInformation
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif

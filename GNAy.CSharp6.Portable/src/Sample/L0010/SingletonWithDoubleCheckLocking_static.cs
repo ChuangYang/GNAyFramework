@@ -47,7 +47,7 @@ namespace GNAy.CSharp6.Portable.Sample
         /// <returns></returns>
         public static bool IsInstanceCreated()
         {
-            return _instance.zIsNotNull();
+            return _instance.zzIsNotNull();
         }
 
         /// <summary>
@@ -56,11 +56,11 @@ namespace GNAy.CSharp6.Portable.Sample
         /// <returns></returns>
         public static SingletonWithDoubleCheckLocking GetInstance() //Lazy initialization.
         {
-            if (_instance.zIsNull())
+            if (_instance.zzIsNull())
             {
                 lock (_syncRoot) //Double-Check Locking
                 {
-                    if (_instance.zIsNull())
+                    if (_instance.zzIsNull())
                     {
                         _instance = new SingletonWithDoubleCheckLocking();
                     }
