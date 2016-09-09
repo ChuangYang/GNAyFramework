@@ -55,6 +55,7 @@ namespace GNAy.CSharp6.Portable.Tests.Mathematics
             bool mActual5 = true;
             bool mActual6 = true;
             bool mActual7 = true;
+            bool mActual8 = true;
 
             //act
             //Group 1
@@ -284,6 +285,17 @@ namespace GNAy.CSharp6.Portable.Tests.Mathematics
                 mActual7 = false;
             }
 
+            //Group 8
+            if (PortableCalculator.ParseInfix("7+3^3-3*2^2^(4^0.5*0.5^2)") != 28)
+            {
+                mActual8 = false;
+            }
+
+            if (PortableCalculator.ParseInfix("( 7\r\n+3 ^ 3)-3\r* (2^\n2) ^( 4^0\r\n.5*0 .\n 5^2 )") != 28)
+            {
+                mActual8 = false;
+            }
+
             //assert
             Contract.Assert(mActual1);
             Contract.Assert(mActual2);
@@ -292,6 +304,7 @@ namespace GNAy.CSharp6.Portable.Tests.Mathematics
             Contract.Assert(mActual5);
             Contract.Assert(mActual6);
             Contract.Assert(mActual7);
+            Contract.Assert(mActual8);
         }
     }
 }

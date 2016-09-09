@@ -48,16 +48,15 @@ namespace GNAy.CSharp6.Portable.Threading
         {
             _memberInfoCollection = new ConcurrentQueue<MemberInformation>();
 
-            _lastMemberInfo = new ThreadLocal<MemberInformation>(() =>
-            {
-                //MemberInformation mMemberInfo = new MemberInformation(EMemberStatus.IsRunning);
+            //_lastMemberInfo = new ThreadLocal<MemberInformation>(() =>
+            //{
+            //    MemberInformation mMemberInfo = new MemberInformation(EMemberStatus.IsRunning);
 
-                //_memberInfoCollection.Enqueue(mMemberInfo);
+            //    _memberInfoCollection.Enqueue(mMemberInfo);
 
-                //return mMemberInfo;
-
-                return null;
-            }, true);
+            //    return mMemberInfo;
+            //}, true);
+            _lastMemberInfo = new ThreadLocal<MemberInformation>(() => null, true);
         }
 
         /// <summary>
@@ -166,7 +165,36 @@ namespace GNAy.CSharp6.Portable.Threading
         /// <param name="iCallerFilePath"></param>
         /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static bool TryAndCatch(Action iTry, Action<Exception, string> iCatch, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static bool TryAndCatch(Action iTry, Action<MemberInformation> iCatch, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        {
+            bool mResult = false;
+
+            try
+            {
+                iTry();
+
+                mResult = true;
+            }
+            catch (Exception mException)
+            {
+                iCatch(SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber));
+            }
+            finally
+            { }
+
+            return mResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="iTry"></param>
+        /// <param name="iFinally"></param>
+        /// <param name="iCallerMemberName"></param>
+        /// <param name="iCallerFilePath"></param>
+        /// <param name="iCallerLineNumber"></param>
+        /// <returns></returns>
+        public static bool TryAndCatch(Action iTry, Action iFinally, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
             bool mResult = false;
 
@@ -179,8 +207,25 @@ namespace GNAy.CSharp6.Portable.Threading
             catch (Exception mException)
             {
                 SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+            }
+            finally
+            {
+                //if (!TryAndCatch(iFinally, iCallerMemberName, iCallerFilePath, iCallerLineNumber))
+                //{
+                //    mResult = false;
+                //}
+            }
 
-                iCatch(mException, mException.StackTrace);
+            //For performance.
+            try
+            {
+                iFinally();
+            }
+            catch (Exception mException)
+            {
+                SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+
+                mResult = false;
             }
             finally
             { }
@@ -198,7 +243,7 @@ namespace GNAy.CSharp6.Portable.Threading
         /// <param name="iCallerFilePath"></param>
         /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static bool TryAndCatch(Action iTry, Action<Exception, string> iCatch, Action iFinally, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
+        public static bool TryAndCatch(Action iTry, Action<MemberInformation> iCatch, Action iFinally, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
             bool mResult = false;
 
@@ -210,17 +255,172 @@ namespace GNAy.CSharp6.Portable.Threading
             }
             catch (Exception mException)
             {
-                SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
-
-                iCatch(mException, mException.StackTrace);
+                iCatch(SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber));
             }
             finally
             {
-                if (!TryAndCatch(iFinally, iCatch, iCallerMemberName, iCallerFilePath, iCallerLineNumber))
-                {
-                    mResult = false;
-                }
+                //if (!TryAndCatch(iFinally, iCatch, iCallerMemberName, iCallerFilePath, iCallerLineNumber))
+                //{
+                //    mResult = false;
+                //}
             }
+
+            //For performance.
+            try
+            {
+                iFinally();
+            }
+            catch (Exception mException)
+            {
+                iCatch(SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber));
+
+                mResult = false;
+            }
+            finally
+            { }
+
+            return mResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="iConstruction"></param>
+        /// <param name="iTry"></param>
+        /// <param name="iCallerMemberName"></param>
+        /// <param name="iCallerFilePath"></param>
+        /// <param name="iCallerLineNumber"></param>
+        /// <returns></returns>
+        public static bool TryUsing<T>(Func<T> iConstruction, Action<T> iTry, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero) where T : class, IDisposable
+        {
+            T mInstance = null;
+
+            //if (!TryAndCatch(() => mInstance = iConstruction(), iCallerMemberName, iCallerFilePath, iCallerLineNumber))
+            //{
+            //    return false;
+            //}
+
+            //return TryAndCatch(() => iTry(mInstance), () => mInstance.Dispose(), iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+
+            //For performance.
+            bool mResult = false;
+
+            try
+            {
+                mInstance = iConstruction();
+
+                mResult = true;
+            }
+            catch (Exception mException)
+            {
+                SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+            }
+            finally
+            { }
+
+            if (!mResult)
+            {
+                return mResult;
+            }
+
+            try
+            {
+                iTry(mInstance);
+            }
+            catch (Exception mException)
+            {
+                SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+
+                mResult = false;
+            }
+            finally
+            { }
+
+            try
+            {
+                mInstance.Dispose();
+            }
+            catch (Exception mException)
+            {
+                SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+
+                mResult = false;
+            }
+            finally
+            { }
+
+            return mResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="iConstruction"></param>
+        /// <param name="iTry"></param>
+        /// <param name="iCatch"></param>
+        /// <param name="iCallerMemberName"></param>
+        /// <param name="iCallerFilePath"></param>
+        /// <param name="iCallerLineNumber"></param>
+        /// <returns></returns>
+        public static bool TryUsing<T>(Func<T> iConstruction, Action<T> iTry, Action<T, MemberInformation> iCatch, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero) where T : class, IDisposable
+        {
+            T mInstance = null;
+
+            //if (!TryAndCatch(() => mInstance = iConstruction(), (ioMemberInfo) => iCatch(mInstance, ioMemberInfo), iCallerMemberName, iCallerFilePath, iCallerLineNumber))
+            //{
+            //    return false;
+            //}
+
+            //return TryAndCatch(() => iTry(mInstance), (ioMemberInfo) => iCatch(mInstance, ioMemberInfo), () => mInstance.Dispose(), iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+
+            //For performance.
+            bool mResult = false;
+
+            try
+            {
+                mInstance = iConstruction();
+
+                mResult = true;
+            }
+            catch (Exception mException)
+            {
+                iCatch(mInstance, SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber));
+            }
+            finally
+            { }
+
+            if (!mResult)
+            {
+                return mResult;
+            }
+
+            try
+            {
+                iTry(mInstance);
+            }
+            catch (Exception mException)
+            {
+                iCatch(mInstance, SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber));
+
+                mResult = false;
+            }
+            finally
+            { }
+
+            try
+            {
+                mInstance.Dispose();
+            }
+            catch (Exception mException)
+            {
+                iCatch(mInstance, SaveMemberInfo(mException, mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber));
+
+                mResult = false;
+            }
+            finally
+            { }
 
             return mResult;
         }
