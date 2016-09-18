@@ -74,7 +74,21 @@ namespace GNAy.CSharp6.Portable.Threading
         /// <returns></returns>
         public static EMemberStatus GetLastMemberStatus()
         {
-            return (GetLastMemberInfo().zzIsNull() ? EMemberStatus.Unknown : GetLastMemberInfo().Status);
+            try
+            {
+                return GetLastMemberInfo().Status;
+            }
+            catch //(Exception mException)
+            {
+                if (GetLastMemberInfo().zzIsNull())
+                {
+                    return EMemberStatus.Unknown;
+                }
+
+                throw;
+            }
+            finally
+            { }
         }
 
         /// <summary>

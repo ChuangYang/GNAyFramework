@@ -13,10 +13,10 @@ using System.Threading;
 
 #region GNAy namespace.
 #if Development
-using GNAy.CSharp6.Portable.Information.L0020_LibraryInformation;
+using GNAy.CSharp6.Portable.Base.L0020_LibraryInformation;
 using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 #else
-using GNAy.CSharp6.Portable.Information;
+using GNAy.CSharp6.Portable.Base;
 using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion

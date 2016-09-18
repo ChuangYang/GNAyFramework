@@ -22,9 +22,9 @@ using GNAy.CSharp6.Portable.Utility;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Information.L0020_LibraryInformation
+namespace GNAy.CSharp6.Portable.Base.L0020_LibraryInformation
 #else
-namespace GNAy.CSharp6.Portable.Information
+namespace GNAy.CSharp6.Portable.Base
 #endif
 {
     /// <summary>
