@@ -16,14 +16,14 @@ using System.Diagnostics.Contracts;
 
 #region Alias.
 #if Development
-using PortableCalculator = GNAy.CSharp6.Portable.Mathematics.L0030_Calculator.Calculator;
+using PortableCalculator = GNAy.CSharp6.Portable.Mathematics.L0040_Calculator.Calculator;
 #else
 using PortableCalculator = GNAy.CSharp6.Portable.Mathematics.Calculator;
 #endif
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Tests.Mathematics.L0031_Mathematics
+namespace GNAy.CSharp6.Portable.Tests.Mathematics.L0041_Mathematics
 #else
 namespace GNAy.CSharp6.Portable.Tests.Mathematics
 #endif

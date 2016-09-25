@@ -34,9 +34,9 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <typeparam name="T"></typeparam>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static bool zzIsNull<T>(this T ioSource)
+        public static bool zzIsNotNull<T>(this T ioSource)
         {
-            return !(ioSource is T);
+            return (ioSource is T);
         }
 
         /// <summary>
@@ -46,9 +46,32 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <typeparam name="T"></typeparam>
         /// <param name="ioSource"></param>
         /// <returns></returns>
-        public static bool zzIsNotNull<T>(this T ioSource)
+        public static bool zzIsNull<T>(this T ioSource)
         {
-            return (ioSource is T);
+            return !zzIsNotNull(ioSource);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ioSource"></param>
+        /// <param name="ioTargetHashCode"></param>
+        public static void zzGetHashCode<T>(this T ioSource, ref int ioTargetHashCode)
+        {
+            ioTargetHashCode ^= ioSource.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ioSource"></param>
+        /// <param name="iTargetHashCode"></param>
+        /// <returns></returns>
+        public static int zzGetHashCode<T>(this T ioSource, int iTargetHashCode)
+        {
+            return (iTargetHashCode ^ ioSource.GetHashCode());
         }
     }
 }

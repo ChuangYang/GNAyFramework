@@ -16,8 +16,9 @@ using System.Threading;
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
-using GNAy.CSharp6.Portable.Mathematics.L0000_Element;
-using GNAy.CSharp6.Portable.Mathematics.L0020_Operator;
+using GNAy.CSharp6.Portable.Mathematics.L0030_Element;
+using GNAy.CSharp6.Portable.Mathematics.L0030_Operator;
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
 using GNAy.CSharp6.Portable.Utility;
@@ -28,7 +29,7 @@ using GNAy.CSharp6.Portable.Utility;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Mathematics.L0030_Calculator
+namespace GNAy.CSharp6.Portable.Mathematics.L0040_Calculator
 #else
 namespace GNAy.CSharp6.Portable.Mathematics
 #endif
@@ -110,7 +111,7 @@ namespace GNAy.CSharp6.Portable.Mathematics
                     return ConstNumberValue.Four;
 
                 default:
-                    throw new NotSupportedException($"[default:][{iOperator}]");
+                    throw new NotSupportedException(StringHelper.DefaultJoin("default:", iOperator));
             }
         }
 
@@ -144,7 +145,7 @@ namespace GNAy.CSharp6.Portable.Mathematics
                     return (decimal)Math.Pow((double)iNumber1, (double)iNumber2);
 
                 default:
-                    throw new NotSupportedException($"[default:][{iNumber1}][{iNumber2}][{iOperator}]");
+                    throw new NotSupportedException(StringHelper.DefaultJoin("default:", iNumber1, iNumber2, iOperator));
             }
         }
 
@@ -235,7 +236,7 @@ namespace GNAy.CSharp6.Portable.Mathematics
                         break;
 
                     default:
-                        throw new NotSupportedException($"[default:][{mElement.Operator}]");
+                        throw new NotSupportedException(StringHelper.DefaultJoin("default:", mElement.Operator));
                 }
             }
 
@@ -279,7 +280,7 @@ namespace GNAy.CSharp6.Portable.Mathematics
 
             if (string.IsNullOrWhiteSpace(iExpression))
             {
-                throw new ArgumentException($"[string.IsNullOrWhiteSpace(iExpression)][{iExpression}]");
+                throw new ArgumentException(StringHelper.DefaultJoin("string.IsNullOrWhiteSpace(iExpression)", iExpression));
             }
             else if (decimal.TryParse((iExpression = iExpression.Replace(ConstString.Blank, ConstString.Empty).Replace(ConstString.HorizontalTab, ConstString.Empty).Replace(ConstString.CarriageReturn, ConstString.Empty).Replace(ConstString.LineFeed, ConstString.Empty)), out mNumber))
             {

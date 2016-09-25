@@ -11,13 +11,18 @@ using System.Threading.Tasks;
 #endregion
 
 #region GNAy namespace.
+#if Development
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
+#else
+using GNAy.CSharp6.Portable.Utility;
+#endif
 #endregion
 
 #region Alias.
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Mathematics.L0000_Element
+namespace GNAy.CSharp6.Portable.Mathematics.L0030_Element
 #else
 namespace GNAy.CSharp6.Portable.Mathematics
 #endif
@@ -59,7 +64,7 @@ namespace GNAy.CSharp6.Portable.Mathematics
         {
             if (string.IsNullOrWhiteSpace(iOperator))
             {
-                throw new ArgumentException($"[string.IsNullOrWhiteSpace(iOperator)][{iOperator}]");
+                throw new ArgumentException(StringHelper.DefaultJoin("string.IsNullOrWhiteSpace(iOperator)", iOperator));
             }
 
             Operator = iOperator;

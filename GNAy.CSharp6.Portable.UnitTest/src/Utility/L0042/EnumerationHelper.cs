@@ -51,18 +51,18 @@ namespace GNAy.CSharp6.Portable.UnitTest.Utility
         //[Constructor, Method, Field, Delegate][True][True][True][True][Constructor][Method][Field][Delegate]
         //0
         //0
-        //[4448][4448][True][605][570][1.06140350877193]
+        //[4448][4448][True][655][610][1.07377049180328]
         //0
         //0
-        //[Constructor, Method, Field, Delegate][Constructor, Method, Field, Delegate][True][604][910906][1508.12251655629]
+        //[Constructor, Method, Field, Delegate][Constructor, Method, Field, Delegate][True][679][985645][1451.61266568483]
         //0
         //0
-        //[False][False][True][606][95720][157.953795379538]
+        //[False][False][True][624][99832][159.987179487179]
         //0
         //0
-        //[Assembly,Module,Class,Struct,Enum,Constructor,Method,Property,Field,Event,Interface,Parameter,Delegate,ReturnValue,GenericParameter,All][True][606][873017][1440.62211221122]
+        //[Assembly,Module,Class,Struct,Enum,Constructor,Method,Property,Field,Event,Interface,Parameter,Delegate,ReturnValue,GenericParameter,All][True][713][817661][1146.78962131837]
         //0
         //0
-        //[Assembly,Module,Class,Struct,Enum,Constructor,Method,Property,Field,Event,Interface,Parameter,Delegate,ReturnValue,GenericParameter,All][True][585][35612][60.8752136752137]
+        //[Assembly,Module,Class,Struct,Enum,Constructor,Method,Property,Field,Event,Interface,Parameter,Delegate,ReturnValue,GenericParameter,All][True][585][34834][59.5452991452991]
     }
 }

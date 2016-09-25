@@ -17,6 +17,7 @@ using System.Diagnostics.Contracts;
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
 using GNAy.CSharp6.Portable.Utility.L0030_EnumerationInformation;
 using GNAy.CSharp6.Portable.Utility.L0040_EnumerationHelper;
 #else
@@ -100,12 +101,13 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
             bool mActualF6 = false;
 
             //act
+            //Foreach flag info.
             mActualA1 = ((AttributeTargets)mArgument5[ConstValue.StartIndex].Source == AttributeTargets.Constructor);
             mActualA2 = ((AttributeTargets)mArgument5[ConstValue.StartIndex + ConstNumberValue.One].Source == AttributeTargets.Method);
             mActualA3 = ((AttributeTargets)mArgument5[ConstValue.StartIndex + ConstNumberValue.Two].Source == AttributeTargets.Field);
             mActualA4 = ((AttributeTargets)mArgument5[ConstValue.StartIndex + ConstNumberValue.Three].Source == AttributeTargets.Delegate);
 
-            Debug.WriteLine($"[{mArgument3}][{mActualA1}][{mActualA2}][{mActualA3}][{mActualA4}][{mArgument5[ConstValue.StartIndex].Source}][{mArgument5[ConstValue.StartIndex + ConstNumberValue.One].Source}][{mArgument5[ConstValue.StartIndex + ConstNumberValue.Two].Source}][{mArgument5[ConstValue.StartIndex + ConstNumberValue.Three].Source}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument3, mActualA1, mActualA2, mActualA3, mActualA4, mArgument5[ConstValue.StartIndex].Source, mArgument5[ConstValue.StartIndex + ConstNumberValue.One].Source, mArgument5[ConstValue.StartIndex + ConstNumberValue.Two].Source, mArgument5[ConstValue.StartIndex + ConstNumberValue.Three].Source));
 
             //Get value.
             mArgument2.Reset();
@@ -130,7 +132,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             mActualB5 = (mActualB1 == mActualB3);
             mActualB6 = (mActualB2 > mActualB4);
-            Debug.WriteLine($"[{mActualB1}][{mActualB3}][{mActualB5}][{mActualB2}][{mActualB4}][{(double)mActualB2 / mActualB4}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(mActualB1, mActualB3, mActualB5, mActualB2, mActualB4, ((double)mActualB2 / mActualB4)));
 
             //Get name.
             mArgument2.Reset();
@@ -155,7 +157,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             mActualC5 = (mActualC1 == mActualC3);
             mActualC6 = (mActualC2 < mActualC4);
-            Debug.WriteLine($"[{mActualC1}][{mActualC3}][{mActualC5}][{mActualC2}][{mActualC4}][{(double)mActualC4 / mActualC2}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(mActualC1, mActualC3, mActualC5, mActualC2, mActualC4, ((double)mActualC4 / mActualC2)));
 
             //Get IsDefined.
             mArgument2.Reset();
@@ -180,7 +182,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             mActualD5 = (mActualD1 == mActualD3);
             mActualD6 = (mActualD2 < mActualD4);
-            Debug.WriteLine($"[{mActualD1}][{mActualD3}][{mActualD5}][{mActualD2}][{mActualD4}][{(double)mActualD4 / mActualD2}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(mActualD1, mActualD3, mActualD5, mActualD2, mActualD4, ((double)mActualD4 / mActualD2)));
 
             //Get RawCollection.
             mArgument2.Reset();
@@ -205,7 +207,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             mActualE5 = (string.Join(",", (IEnumerable<Enum>)mActualE1) == string.Join(",", mActualE3.Cast<Enum>()));
             mActualE6 = (mActualE2 < mActualE4);
-            Debug.WriteLine($"[{string.Join(",", mActualE3.Cast<Enum>())}][{mActualE5}][{mActualE2}][{mActualE4}][{(double)mActualE4 / mActualE2}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(string.Join(",", mActualE3.Cast<Enum>()), mActualE5, mActualE2, mActualE4, ((double)mActualE4 / mActualE2)));
 
             //Get NameCollection.
             mArgument2.Reset();
@@ -230,7 +232,7 @@ namespace GNAy.CSharp6.Portable.Tests.Utility
 
             mActualF5 = (string.Join(",", mActualF1) == string.Join(",", mActualF3));
             mActualF6 = (mActualF2 < mActualF4);
-            Debug.WriteLine($"[{string.Join(",", mActualF3)}][{mActualF5}][{mActualF2}][{mActualF4}][{(double)mActualF4 / mActualF2}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(string.Join(",", mActualF3), mActualF5, mActualF2, mActualF4, ((double)mActualF4 / mActualF2)));
 
             //assert
             Contract.Assert(mActualA1);

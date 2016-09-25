@@ -16,6 +16,7 @@ using System.Diagnostics.Contracts;
 #if Development
 using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
 using GNAy.CSharp6.Portable.Utility.L0020_CallerService;
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
 using GNAy.CSharp6.Portable.Utility.L0040_MemberInformation;
 #else
 using GNAy.CSharp6.Portable.Utility;
@@ -82,12 +83,12 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
             mActual8 = (mArgument2.Exception == mArgument1.Exception);
             mActual9 = (mArgument2.ExceptionStackTrace == mArgument1.ExceptionStackTrace);
 
-            Debug.WriteLine($"[{mArgument2.CreationTime.Ticks}][{mArgument1.CreationTime.Ticks}][{mArgument2.CreationTime.Ticks - mArgument1.CreationTime.Ticks}]");
-            Debug.WriteLine($"[{mArgument2.Status}][{mArgument1.Status}]");
-            Debug.WriteLine($"[{mArgument2.UniqueThreadID}][{mArgument2.UniqueMemberID}]");
-            Debug.WriteLine($"[{mArgument2.Name}][{mArgument2.FilePath}]");
-            Debug.WriteLine($"[{mArgument2.LineNumber}][{mArgument1.LineNumber}][{mArgument2.LineNumber - mArgument1.LineNumber}]");
-            Debug.WriteLine($"[{mArgument2.Exception}][{mArgument2.ExceptionStackTrace}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.CreationTime.Ticks, mArgument1.CreationTime.Ticks, (mArgument2.CreationTime.Ticks - mArgument1.CreationTime.Ticks)));
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.Status, mArgument1.Status));
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.UniqueThreadID, mArgument2.UniqueMemberID));
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.Name, mArgument2.FilePath));
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.LineNumber, mArgument1.LineNumber, (mArgument2.LineNumber - mArgument1.LineNumber)));
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.Exception, mArgument2.ExceptionStackTrace));
 
             //assert
             Contract.Assert(mActual1);

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.UnitTest.Mathematics.L0032_Calculator
+namespace GNAy.CSharp6.Portable.UnitTest.Mathematics.L0042_Calculator
 #else
 namespace GNAy.CSharp6.Portable.UnitTest.Mathematics
 #endif
@@ -26,7 +26,7 @@ namespace GNAy.CSharp6.Portable.UnitTest.Mathematics
     public class Calculator
     {
 #if Development
-        private static CSharp6.Portable.Tests.Mathematics.L0031_Mathematics.Calculator _calculator;
+        private static CSharp6.Portable.Tests.Mathematics.L0041_Mathematics.Calculator _calculator;
 #else
         private static CSharp6.Portable.Tests.Mathematics.Calculator _calculator;
 #endif
@@ -34,7 +34,7 @@ namespace GNAy.CSharp6.Portable.UnitTest.Mathematics
         static Calculator()
         {
 #if Development
-            _calculator = new Tests.Mathematics.L0031_Mathematics.Calculator();
+            _calculator = new Tests.Mathematics.L0041_Mathematics.Calculator();
 #else
             _calculator = new Tests.Mathematics.Calculator();
 #endif

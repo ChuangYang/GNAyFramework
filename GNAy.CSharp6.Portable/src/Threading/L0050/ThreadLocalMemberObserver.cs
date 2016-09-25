@@ -18,7 +18,6 @@ using System.Threading;
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
 using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
-using GNAy.CSharp6.Portable.Utility.L0000_ObjectHelper;
 using GNAy.CSharp6.Portable.Utility.L0040_MemberInformation;
 #else
 using GNAy.CSharp6.Portable.Const;
@@ -78,13 +77,12 @@ namespace GNAy.CSharp6.Portable.Threading
             {
                 return GetLastMemberInfo().Status;
             }
+            catch (NullReferenceException)
+            {
+                return EMemberStatus.Unknown;
+            }
             catch //(Exception mException)
             {
-                if (GetLastMemberInfo().zzIsNull())
-                {
-                    return EMemberStatus.Unknown;
-                }
-
                 throw;
             }
             finally

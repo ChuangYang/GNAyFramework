@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 #if Development
 using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
-using GNAy.CSharp6.Portable.Utility.L0000_ObjectHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
 #endif
@@ -41,7 +40,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <returns></returns>
         public static bool zzIsNullOrEmpty(this StringBuilder ioSource)
         {
-            return (ioSource.zzIsNull() || (ioSource.Length == ConstValue.Empty));
+            return ((ioSource == null) || (ioSource.Length == ConstValue.Empty));
         }
 
         /// <summary>

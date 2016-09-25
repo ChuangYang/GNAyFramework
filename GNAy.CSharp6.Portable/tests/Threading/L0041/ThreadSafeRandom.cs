@@ -19,6 +19,7 @@ using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
 using GNAy.CSharp6.Portable.Threading.L0030_ThreadLocalInformation;
 using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 using GNAy.CSharp6.Portable.Utility.L0020_CollectionTHelper;
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
 using GNAy.CSharp6.Portable.Threading;
@@ -76,9 +77,9 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
 
             mActual1 = PortableThreadSafeRandom.CheckSeedValuesNoDuplicate();
 
-            Debug.WriteLine($"[{ThreadLocalInformation.GetCreationTimeValues().Count}][{string.Join(", ", ThreadLocalInformation.GetCreationTimeValues())}]");
-            Debug.WriteLine($"[{ThreadLocalInformation.GetGuidValues().Count}][{string.Join(", ", ThreadLocalInformation.GetGuidValues())}]");
-            Debug.WriteLine($"[{ThreadLocalInformation.GetUniqueIDValues().Count}][{string.Join(", ", ThreadLocalInformation.GetUniqueIDValues())}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(ThreadLocalInformation.GetCreationTimeValues().Count, string.Join(", ", ThreadLocalInformation.GetCreationTimeValues())));
+            Debug.WriteLine(StringHelper.DefaultJoin(ThreadLocalInformation.GetGuidValues().Count, string.Join(", ", ThreadLocalInformation.GetGuidValues())));
+            Debug.WriteLine(StringHelper.DefaultJoin(ThreadLocalInformation.GetUniqueIDValues().Count, string.Join(", ", ThreadLocalInformation.GetUniqueIDValues())));
 
             if (!mActual1)
             {
@@ -88,7 +89,7 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
                     {
                         if (j == i)
                         {
-                            Debug.WriteLine($"[{i}][{j}][{ThreadLocalInformation.GetUniqueIDValues()[i]}]");
+                            Debug.WriteLine(StringHelper.DefaultJoin(i, j, ThreadLocalInformation.GetUniqueIDValues()[i]));
                         }
                     }
                 }
@@ -116,15 +117,15 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
             {
                 for (int j = ConstValue.StartIndex; j < mLoopTimes; ++j)
                 {
-                    Debug.WriteLine($"[{TimeHelper.GetTimeNowByPreprocessor().Ticks}][{ThreadLocalInformation.GetCreationTime().Ticks}][{ThreadLocalInformation.GetUniqueID()}][{i}][{j}][{PortableThreadSafeRandom.GetInstance().Next()}]");
+                    Debug.WriteLine(StringHelper.DefaultJoin(TimeHelper.GetTimeNowByPreprocessor().Ticks, ThreadLocalInformation.GetCreationTime().Ticks, ThreadLocalInformation.GetUniqueID(), i, j, PortableThreadSafeRandom.GetInstance().Next()));
                 }
             });
 
             mActual1 = PortableThreadSafeRandom.CheckSeedValuesNoDuplicate();
 
-            Debug.WriteLine($"[{ThreadLocalInformation.GetCreationTimeValues().Count}][{string.Join(", ", ThreadLocalInformation.GetCreationTimeValues())}]");
-            Debug.WriteLine($"[{ThreadLocalInformation.GetGuidValues().Count}][{string.Join(", ", ThreadLocalInformation.GetGuidValues())}]");
-            Debug.WriteLine($"[{ThreadLocalInformation.GetUniqueIDValues().Count}][{string.Join(", ", ThreadLocalInformation.GetUniqueIDValues())}]");
+            Debug.WriteLine(StringHelper.DefaultJoin(ThreadLocalInformation.GetCreationTimeValues().Count, string.Join(", ", ThreadLocalInformation.GetCreationTimeValues())));
+            Debug.WriteLine(StringHelper.DefaultJoin(ThreadLocalInformation.GetGuidValues().Count, string.Join(", ", ThreadLocalInformation.GetGuidValues())));
+            Debug.WriteLine(StringHelper.DefaultJoin(ThreadLocalInformation.GetUniqueIDValues().Count, string.Join(", ", ThreadLocalInformation.GetUniqueIDValues())));
 
             if (!mActual1)
             {
@@ -134,7 +135,7 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
                     {
                         if (j == i)
                         {
-                            Debug.WriteLine($"[{i}][{j}][{ThreadLocalInformation.GetUniqueIDValues()[i]}]");
+                            Debug.WriteLine(StringHelper.DefaultJoin(i, j, ThreadLocalInformation.GetUniqueIDValues()[i]));
                         }
                     }
                 }

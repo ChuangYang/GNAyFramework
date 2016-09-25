@@ -96,6 +96,21 @@ namespace GNAy.CSharp6.Portable.Const
         public const string CloseParenthesis = ")";
 
         /// <summary>
+        /// "["
+        /// </summary>
+        public const string OpenBracket = "[";
+
+        /// <summary>
+        /// "]"
+        /// </summary>
+        public const string CloseBracket = "]";
+
+        /// <summary>
+        /// "]["
+        /// </summary>
+        public const string DefaultSeparator = CloseBracket + OpenBracket;
+
+        /// <summary>
         /// "{"
         /// </summary>
         public const string OpenBrace = "{";
@@ -116,13 +131,18 @@ namespace GNAy.CSharp6.Portable.Const
         public const string FormatTail = CloseBrace;
 
         /// <summary>
-        /// "{0}"
+        /// "{0"
         /// </summary>
-        public const string FormatInitial = (FormatHead + ConstNumberString.Zero + FormatTail);
+        public const string FormatInitial = (FormatHead + ConstNumberString.Zero);
 
         /// <summary>
-        /// "{S}"
+        /// "{S"
         /// </summary>
-        public const string FormatSequence = (FormatHead + "S" + FormatTail);
+        public const string FormatSequence = (FormatHead + "S");
+
+        /// <summary>
+        /// "[{0}]"
+        /// </summary>
+        public const string DefaultJoinFormat = (OpenBracket + FormatInitial + FormatTail + CloseBracket);
     }
 }

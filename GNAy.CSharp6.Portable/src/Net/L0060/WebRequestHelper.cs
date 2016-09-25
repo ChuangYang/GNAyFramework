@@ -14,10 +14,10 @@ using System.Net;
 
 #region GNAy namespace.
 #if Development
-using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
 using GNAy.CSharp6.Portable.Threading.L0050_ThreadLocalMemberObserver;
 using GNAy.CSharp6.Portable.Utility.L0020_CollectionTHelper;
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
 using GNAy.CSharp6.Portable.Threading;
@@ -97,7 +97,7 @@ namespace GNAy.CSharp6.Portable.Net
                 { }
             }
 
-            throw new ArgumentException($"[for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)][{ioSourceAndBackups.Count}]");
+            throw new ArgumentException(StringHelper.DefaultJoin("for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)", ioSourceAndBackups.Count));
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace GNAy.CSharp6.Portable.Net
                 { }
             }
 
-            throw new ArgumentException($"[for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)][{ioSourceAndBackups.Count}]");
+            throw new ArgumentException(StringHelper.DefaultJoin("for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)", ioSourceAndBackups.Count));
         }
     }
 }

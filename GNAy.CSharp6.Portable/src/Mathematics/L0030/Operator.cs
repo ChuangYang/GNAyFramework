@@ -13,8 +13,10 @@ using System.Threading.Tasks;
 #region GNAy namespace.
 #if Development
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
+using GNAy.CSharp6.Portable.Utility.L0020_StringHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
+using GNAy.CSharp6.Portable.Utility;
 #endif
 #endregion
 
@@ -22,7 +24,7 @@ using GNAy.CSharp6.Portable.Const;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Mathematics.L0020_Operator
+namespace GNAy.CSharp6.Portable.Mathematics.L0030_Operator
 #else
 namespace GNAy.CSharp6.Portable.Mathematics
 #endif
@@ -92,7 +94,7 @@ namespace GNAy.CSharp6.Portable.Mathematics
                     return true;
 
                 default:
-                    throw new ArgumentException($"[default:][{iTarget}]");
+                    throw new ArgumentException(StringHelper.DefaultJoin("default:", iTarget));
             }
         }
     }
