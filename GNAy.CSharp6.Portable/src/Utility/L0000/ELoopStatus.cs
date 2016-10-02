@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 #endregion
 
 #if Development
-namespace GNAy.CSharp6.Portable.Utility.L0000_CommonEvent
+namespace GNAy.CSharp6.Portable.Utility.L0000_ELoopStatus
 #else
 namespace GNAy.CSharp6.Portable.Utility
 #endif
@@ -25,24 +25,36 @@ namespace GNAy.CSharp6.Portable.Utility
     /// <summary>
     /// 
     /// </summary>
-    public class CommonEvent
+    public enum ELoopStatus
     {
         /// <summary>
-        /// 
+        /// 0
         /// </summary>
-        /// <returns></returns>
-        public static bool ReturnFalse()
-        {
-            return false;
-        }
+        Unknown,
 
         /// <summary>
-        /// 
+        /// 1
         /// </summary>
-        /// <returns></returns>
-        public static bool ReturnTrue()
-        {
-            return true;
-        }
+        IsWaiting,
+
+        /// <summary>
+        /// 2
+        /// </summary>
+        IsInvoking,
+
+        /// <summary>
+        /// 3
+        /// </summary>
+        IsPausing,
+
+        /// <summary>
+        /// 4
+        /// </summary>
+        IsStopping,
+
+        /// <summary>
+        /// 5
+        /// </summary>
+        IsStopped,
     }
 }

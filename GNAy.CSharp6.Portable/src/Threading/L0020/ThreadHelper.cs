@@ -13,7 +13,7 @@ using System.Threading;
 
 #region GNAy namespace.
 #if Development
-using GNAy.CSharp6.Portable.Utility.L0000_CommonEvent;
+using GNAy.CSharp6.Portable.Utility.L0000_LoopResult;
 using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 #else
 using GNAy.CSharp6.Portable.Utility;
@@ -39,7 +39,7 @@ namespace GNAy.CSharp6.Portable.Threading
         /// </summary>
         public static void MinSleep()
         {
-            SpinWait.SpinUntil(CommonEvent.ReturnFalse, TimeHelper.MinTimeUnit);
+            SpinWait.SpinUntil(LoopResult.ReturnToContinue, TimeHelper.MinTimeUnit);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace GNAy.CSharp6.Portable.Threading
         /// <param name="iMillisecondsTimeout"></param>
         public static void Sleep(int iMillisecondsTimeout)
         {
-            SpinWait.SpinUntil(CommonEvent.ReturnFalse, iMillisecondsTimeout);
+            SpinWait.SpinUntil(LoopResult.ReturnToContinue, iMillisecondsTimeout);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace GNAy.CSharp6.Portable.Threading
         /// <param name="iTimeout"></param>
         public static void Sleep(TimeSpan iTimeout)
         {
-            SpinWait.SpinUntil(CommonEvent.ReturnFalse, iTimeout);
+            SpinWait.SpinUntil(LoopResult.ReturnToContinue, iTimeout);
         }
     }
 }

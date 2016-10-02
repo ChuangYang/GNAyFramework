@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 #region .NET Framework namespace.
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
 #endregion
 
 #region Third party library.
@@ -14,6 +15,8 @@ using System.Net;
 
 #region GNAy namespace.
 #if Development
+using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
+using GNAy.CSharp6.Portable.Const.L0010_ConstString;
 using GNAy.CSharp6.Portable.Const.L0010_ConstValue;
 using GNAy.CSharp6.Portable.Threading.L0050_ThreadLocalMemberObserver;
 using GNAy.CSharp6.Portable.Utility.L0020_CollectionTHelper;
@@ -75,8 +78,11 @@ namespace GNAy.CSharp6.Portable.Net
         /// 
         /// </summary>
         /// <param name="ioSourceAndBackups"></param>
+        /// <param name="iCallerMemberName"></param>
+        /// <param name="iCallerFilePath"></param>
+        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static async Task<byte[]> zzGetResponseBytes(this IList<WebRequest> ioSourceAndBackups)
+        public static async Task<byte[]> zzGetResponseBytes(this IList<WebRequest> ioSourceAndBackups, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
             for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)
             {
@@ -91,7 +97,7 @@ namespace GNAy.CSharp6.Portable.Net
                         throw mException;
                     }
 
-                    mException.zzSaveMemberInfo(mException.StackTrace);
+                    mException.zzSaveMemberInfo(mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
                 }
                 finally
                 { }
@@ -125,8 +131,11 @@ namespace GNAy.CSharp6.Portable.Net
         /// </summary>
         /// <param name="ioSourceAndBackups"></param>
         /// <param name="ioEncoding"></param>
+        /// <param name="iCallerMemberName"></param>
+        /// <param name="iCallerFilePath"></param>
+        /// <param name="iCallerLineNumber"></param>
         /// <returns></returns>
-        public static async Task<string> zzGetResponseString(this IList<WebRequest> ioSourceAndBackups, Encoding ioEncoding)
+        public static async Task<string> zzGetResponseString(this IList<WebRequest> ioSourceAndBackups, Encoding ioEncoding, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
             for (int i = ConstValue.StartIndex; i < ioSourceAndBackups.Count; ++i)
             {
@@ -141,7 +150,7 @@ namespace GNAy.CSharp6.Portable.Net
                         throw mException;
                     }
 
-                    mException.zzSaveMemberInfo(mException.StackTrace);
+                    mException.zzSaveMemberInfo(mException.StackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
                 }
                 finally
                 { }
