@@ -70,10 +70,7 @@ namespace GNAy.CSharp6.Portable.UnitTest.Sample
             Assert.IsTrue(mActual2 == int.MaxValue);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         internal partial class NumberCalculatingTest1
         {
             /// <summary>

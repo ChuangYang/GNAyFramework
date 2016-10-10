@@ -81,10 +81,7 @@ namespace GNAy.CSharp6.Portable.Tests.Sample
             Contract.Assert(mActual2 == int.MaxValue);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         internal partial class NumberCalculatingTest1
         {
             /// <summary>

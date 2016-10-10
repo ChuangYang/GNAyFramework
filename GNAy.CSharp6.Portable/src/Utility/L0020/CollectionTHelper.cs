@@ -176,7 +176,7 @@ namespace GNAy.CSharp6.Portable.Utility
         {
             if (iStartIndex < ConstValue.StartIndex)
             {
-                throw new ArgumentOutOfRangeException(iStartIndex.ToString());
+                throw new ArgumentOutOfRangeException(nameof(iStartIndex), $"{iStartIndex} < {ConstValue.StartIndex}");
             }
             else if (iStartIndex == ConstValue.StartIndex)
             {
@@ -219,7 +219,7 @@ namespace GNAy.CSharp6.Portable.Utility
             }
             else if (iStartIndex < ConstValue.StartIndex)
             {
-                throw new ArgumentOutOfRangeException(iStartIndex.ToString());
+                throw new ArgumentOutOfRangeException(nameof(iStartIndex), $"{iStartIndex} < {ConstValue.StartIndex}");
             }
             else if (iStartIndex >= ioSource.Count)
             {

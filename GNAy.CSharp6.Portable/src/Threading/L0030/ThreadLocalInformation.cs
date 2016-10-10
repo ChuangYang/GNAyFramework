@@ -56,6 +56,12 @@ namespace GNAy.CSharp6.Portable.Threading
         }
 
         /// <summary>
+        /// Initialize the thread local storage.
+        /// </summary>
+        public static void Initialize()
+        { }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
@@ -72,29 +78,17 @@ namespace GNAy.CSharp6.Portable.Threading
         {
             return _uniqueID.Value;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         internal static IList<DateTime> GetCreationTimeValues()
         {
             return _creationTime.Values;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         internal static IList<Guid> GetGuidValues()
         {
             return _guid.Values;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         internal static IList<int> GetUniqueIDValues()
         {
             return _uniqueID.Values;

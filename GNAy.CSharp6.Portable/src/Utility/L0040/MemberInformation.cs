@@ -17,6 +17,7 @@ using GNAy.CSharp6.Portable.Const.L0000_ConstNumberValue;
 using GNAy.CSharp6.Portable.Const.L0010_ConstString;
 using GNAy.CSharp6.Portable.Threading.L0030_ThreadLocalInformation;
 using GNAy.CSharp6.Portable.Utility.L0000_EMemberStatus;
+using GNAy.CSharp6.Portable.Utility.L0000_ICreation;
 using GNAy.CSharp6.Portable.Utility.L0010_TimeHelper;
 #else
 using GNAy.CSharp6.Portable.Const;
@@ -36,12 +37,9 @@ namespace GNAy.CSharp6.Portable.Utility
     /// <summary>
     /// 
     /// </summary>
-    public class MemberInformation
+    public class MemberInformation : ICreation
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public readonly DateTime CreationTime;
+        private readonly DateTime _creationTime;
 
         /// <summary>
         /// 
@@ -101,7 +99,7 @@ namespace GNAy.CSharp6.Portable.Utility
                 throw new ArgumentException("iStatus == EMemberStatus.HasException");
             }
 
-            CreationTime = TimeHelper.GetTimeNowByPreprocessor();
+            _creationTime = TimeHelper.GetTimeNowByPreprocessor();
 
             Status = iStatus;
 
@@ -126,7 +124,7 @@ namespace GNAy.CSharp6.Portable.Utility
         /// <param name="iCallerLineNumber"></param>
         public MemberInformation(Exception ioException, string iExceptionStackTrace, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
-            CreationTime = TimeHelper.GetTimeNowByPreprocessor();
+            _creationTime = TimeHelper.GetTimeNowByPreprocessor();
 
             Status = EMemberStatus.HasException;
 
@@ -139,6 +137,25 @@ namespace GNAy.CSharp6.Portable.Utility
 
             Exception = ioException;
             ExceptionStackTrace = iExceptionStackTrace;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public DateTime GetCreationTime()
+        {
+            return _creationTime;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCreated()
+        {
+            //return (GetCreationTime() > TimeHelper.TimeDefault);
+            return true;
         }
     }
 }

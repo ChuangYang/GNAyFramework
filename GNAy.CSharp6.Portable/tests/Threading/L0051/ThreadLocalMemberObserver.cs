@@ -73,7 +73,7 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
             mArgument1 = PortableThreadLocalMemberObserver.SaveMemberInfo(EMemberStatus.IsRunning);
             mArgument2 = PortableThreadLocalMemberObserver.SaveMemberInfo(EMemberStatus.IsFinished);
 
-            mActual1 = (mArgument2.CreationTime >= mArgument1.CreationTime);
+            mActual1 = (mArgument2.GetCreationTime() >= mArgument1.GetCreationTime());
             mActual2 = ((mArgument2.Status == EMemberStatus.IsFinished) && (mArgument1.Status == EMemberStatus.IsRunning));
             mActual3 = (mArgument2.UniqueThreadID == mArgument1.UniqueThreadID);
             mActual4 = (mArgument2.UniqueMemberID == mArgument1.UniqueMemberID);
@@ -83,7 +83,7 @@ namespace GNAy.CSharp6.Portable.Tests.Threading
             mActual8 = (mArgument2.Exception == mArgument1.Exception);
             mActual9 = (mArgument2.ExceptionStackTrace == mArgument1.ExceptionStackTrace);
 
-            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.CreationTime.Ticks, mArgument1.CreationTime.Ticks, (mArgument2.CreationTime.Ticks - mArgument1.CreationTime.Ticks)));
+            Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.GetCreationTime().Ticks, mArgument1.GetCreationTime().Ticks, (mArgument2.GetCreationTime().Ticks - mArgument1.GetCreationTime().Ticks)));
             Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.Status, mArgument1.Status));
             Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.UniqueThreadID, mArgument2.UniqueMemberID));
             Debug.WriteLine(StringHelper.DefaultJoin(mArgument2.Name, mArgument2.FilePath));

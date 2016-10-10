@@ -39,19 +39,32 @@ namespace GNAy.CSharp6.Portable.Threading
     /// </summary>
     public static class ThreadLocalMemberObserver
     {
-        private static readonly ConcurrentQueue<MemberInformation> _memberInfoCollection;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Func<MemberInformation, bool> BeforeEnqueueMemberInfo;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Func<MemberInformation, bool> MemberInfoHandler;
+
+        internal static readonly ConcurrentQueue<MemberInformation> MemberInfoCollection;
 
         private static readonly ThreadLocal<MemberInformation> _lastMemberInfo;
 
         static ThreadLocalMemberObserver()
         {
-            _memberInfoCollection = new ConcurrentQueue<MemberInformation>();
+            BeforeEnqueueMemberInfo = delegate { return true; };
+            MemberInfoHandler = null;
+
+            MemberInfoCollection = new ConcurrentQueue<MemberInformation>();
 
             //_lastMemberInfo = new ThreadLocal<MemberInformation>(() =>
             //{
             //    MemberInformation mMemberInfo = new MemberInformation(EMemberStatus.IsRunning);
 
-            //    _memberInfoCollection.Enqueue(mMemberInfo);
+            //    MemberInfoCollection.Enqueue(mMemberInfo);
 
             //    return mMemberInfo;
             //}, true);
@@ -102,7 +115,11 @@ namespace GNAy.CSharp6.Portable.Threading
             MemberInformation mMemberInfo = new MemberInformation(iStatus, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
 
             _lastMemberInfo.Value = mMemberInfo;
-            _memberInfoCollection.Enqueue(mMemberInfo);
+
+            if (BeforeEnqueueMemberInfo(mMemberInfo))
+            {
+                MemberInfoCollection.Enqueue(mMemberInfo);
+            }
 
             return mMemberInfo;
         }
@@ -121,7 +138,11 @@ namespace GNAy.CSharp6.Portable.Threading
             MemberInformation mMemberInfo = new MemberInformation(ioException, iExceptionStackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
 
             _lastMemberInfo.Value = mMemberInfo;
-            _memberInfoCollection.Enqueue(mMemberInfo);
+
+            if (BeforeEnqueueMemberInfo(mMemberInfo))
+            {
+                MemberInfoCollection.Enqueue(mMemberInfo);
+            }
 
             return mMemberInfo;
         }
@@ -138,6 +159,23 @@ namespace GNAy.CSharp6.Portable.Threading
         public static MemberInformation zzSaveMemberInfo(this Exception ioSource, string iExceptionStackTrace, [CallerMemberName] string iCallerMemberName = ConstString.Empty, [CallerFilePath] string iCallerFilePath = ConstString.Empty, [CallerLineNumber] int iCallerLineNumber = ConstNumberValue.Zero)
         {
             return SaveMemberInfo(ioSource, iExceptionStackTrace, iCallerMemberName, iCallerFilePath, iCallerLineNumber);
+        }
+
+        internal static void UnobservedTaskException(object ioSender, UnobservedTaskExceptionEventArgs ioEventArgs)
+        {
+            //ioEventArgs.Exception.Handle(ioException =>
+            //{
+            //    Console.WriteLine("Exception type: {0}", ioException.GetType());
+
+            //    return true;
+            //});
+
+            foreach (Exception mException in ioEventArgs.Exception.InnerExceptions)
+            {
+                zzSaveMemberInfo(mException, mException.StackTrace);
+            }
+
+            ioEventArgs.SetObserved();
         }
 
         /// <summary>
